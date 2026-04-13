@@ -57,6 +57,22 @@ const wordDb = [
 ];
 
 let currentIdx = 0;
+let studyCount = 0;
+const DAILY_GOAL = 10; // 목표 단어 수
+
+/**
+ * Update the study stats displayed to the user
+ */
+function updateStats() {
+  const countEl = document.getElementById('study-count');
+  const percentEl = document.getElementById('progress-percent');
+  
+  if (countEl) countEl.innerText = studyCount;
+  if (percentEl) {
+    const progress = Math.min(Math.round((studyCount / DAILY_GOAL) * 100), 100);
+    percentEl.innerText = progress;
+  }
+}
 
 /**
  * Fetch phonetics from Free Dictionary API (optional enhancement)
@@ -113,6 +129,8 @@ function checkAnswer(selected, correct, btn) {
   
   if (selected === correct) {
     // Correct UI
+    studyCount++;
+    updateStats();
     msg.innerText = "정답입니다! 훌륭해요! 🎉";
     msg.style.color = "#2ecc71";
     btn.style.backgroundColor = "#e8fdf0";
