@@ -78,10 +78,12 @@ function updateStats() {
  * Reset the user's study progress
  */
 function resetProgress() {
-  if (confirm("공부한 기록을 초기화하시겠습니까?")) {
-    studyCount = 0;
-    localStorage.removeItem('todayCount');
-    updateStats();
+  // 사용자에게 한 번 더 물어봅니다 (실수 방지)
+  if (confirm("오늘 공부한 기록을 모두 초기화할까요?")) {
+    studyCount = 0; // 숫자를 0으로 변경
+    localStorage.setItem('todayCount', 0); // 브라우저 저장소도 0으로 변경
+    updateStats(); // 화면에 표시되는 숫자와 그래프 업데이트
+    alert("기록이 초기화되었습니다. 다시 힘내봐요! 💪");
   }
 }
 
