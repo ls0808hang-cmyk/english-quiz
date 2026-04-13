@@ -116,49 +116,62 @@ body {
 /* Visual Learning Section */
 .visual-learning-section {
   margin-top: 50px;
-  text-align: center;
+  padding: 25px;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
 }
 
 .visual-learning-section h3 {
-  color: var(--text-dark);
+  text-align: center;
+  color: #2c3e50;
   margin-bottom: 10px;
   font-size: 1.5rem;
 }
 
 .visual-learning-section p {
+  text-align: center;
   color: var(--text-light);
   margin-bottom: 30px;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
 }
 
 .gallery-item {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.gallery-item:hover {
+  transform: translateY(-5px);
+}
+
 .gallery-item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #eee;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
 }
 
-.gallery-item img:hover {
-  transform: scale(1.03);
-}
-
 .gallery-item span {
+  display: block;
   margin-top: 10px;
   font-size: 0.95rem;
-  color: var(--text-dark);
+  color: #555;
   font-weight: 500;
 }
 
@@ -226,6 +239,7 @@ body {
   }
   .gallery-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
   .option-btn {
     padding: 15px;
