@@ -192,7 +192,7 @@ async function loadQuiz() {
 /**
  * Verify user's choice
  */
-function checkAnswer(selected, correct, btn) {
+function checkAnswer(selected, correct, selectedBtn) {
   const msg = document.getElementById('result-msg');
   const allBtns = document.querySelectorAll('.option-btn');
   
@@ -201,28 +201,34 @@ function checkAnswer(selected, correct, btn) {
     studyCount++;
     localStorage.setItem('todayCount', studyCount); // 브라우저에 저장
     updateStats(); // 화면 업데이트
+    
     msg.innerText = "정답입니다! 훌륭해요! 🎉";
     msg.style.color = "#2ecc71";
-    btn.style.backgroundColor = "#e8fdf0";
-    btn.style.borderColor = "#2ecc71";
     
-    // Disable all buttons to prevent multiple clicks
-    allBtns.forEach(b => b.disabled = true);
+    // Highlight correct button
+    allBtns.forEach(btn => {
+      if (btn.innerText === correct) {
+        btn.style.backgroundColor = "#2ecc71";
+        btn.style.color = "white";
+        btn.style.borderColor = "#2ecc71";
+      }
+      btn.disabled = true; // Disable all to prevent double-clicks
+    });
 
-    // Auto load next quiz after delay
+    // Auto load next quiz after slightly shorter delay
     setTimeout(() => {
       currentIdx = (currentIdx + 1) % wordDb.length;
       loadQuiz();
-    }, 1500);
+    }, 1200);
   } else {
     // Incorrect UI
     msg.innerText = "아쉬워요! 다시 한 번 생각해보세요. 🤔";
     msg.style.color = "#e74c3c";
-    btn.style.backgroundColor = "#fdf2f2";
-    btn.style.borderColor = "#e74c3c";
+    selectedBtn.style.backgroundColor = "#fdf2f2";
+    selectedBtn.style.borderColor = "#e74c3c";
     
     // Optional: Shake animation or temporary feedback
-    btn.animate([
+    selectedBtn.animate([
       { transform: 'translateX(0)' },
       { transform: 'translateX(-5px)' },
       { transform: 'translateX(5px)' },
