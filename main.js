@@ -221,18 +221,7 @@ async function loadQuiz() {
   
   if (isReviewMode && wrongWords.length > 0) {
     // Review mode logic
-    const reviewItem = wrongWords[reviewIdx];
-    // Create a mock quiz object for compatibility
-    quiz = {
-      w: reviewItem.w,
-      t: reviewItem.t,
-      // Pick 3 random distractor meanings from wordDb
-      o: [reviewItem.t, ...wordDb
-          .filter(item => item.t !== reviewItem.t)
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 3)
-          .map(item => item.t)]
-    };
+    quiz = wrongWords[reviewIdx];
   } else {
     // Normal mode logic
     isReviewMode = false; // Just in case
@@ -342,7 +331,7 @@ function checkAnswer(selected, correct, selectedBtn) {
     // --- 오답 노트 저장 로직 추가 ---
     // 이미 저장된 단어인지 확인 후 없으면 추가
     if (!wrongWords.some(item => item.w === quiz.w)) {
-      wrongWords.push({ w: quiz.w, t: quiz.t });
+      wrongWords.push(quiz); // 전체 데이터 저장
       localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
       displayWrongWords(); // 화면 업데이트
     }
