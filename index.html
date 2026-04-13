@@ -1,14 +1,49 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마스터 영단어 퀴즈 - 매일 5분 영어 실력 향상</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+<div class="main-container">
+    <header class="quiz-header">
+        <h1>📝 오늘의 마스터 영단어</h1>
+        <p>인공지능 기반 실시간 사전 데이터를 활용한 맞춤형 퀴즈</p>
+    </header>
+
+    <main class="word-card">
+        <div id="target-word" class="word-text">Loading...</div>
+        <div id="phonetic" class="phonetic"></div>
+        
+        <div class="options-grid" id="options">
+            <!-- Options will be dynamically inserted here -->
+        </div>
+        
+        <div id="result-msg" class="result-msg"></div>
+    </main>
+
+    <article class="content-section">
+        <section class="blog-post">
+            <h3>오늘의 단어 'Resilience'를 깊게 알아보기</h3>
+            <p>오늘 퀴즈에 나온 <strong>Resilience</strong>는 현대인에게 가장 필요한 덕목 중 하나로 꼽힙니다. 단순히 '회복력'이라는 뜻을 넘어, 역경을 딛고 다시 일어서는 마음의 근육을 의미하죠. 심리학에서는 이 단어를 통해 스트레스 관리와 정신 건강의 중요성을 강조합니다.</p>
+        </section>
+
+        <section class="blog-post">
+            <h3>효과적인 영단어 암기를 위한 3단계 전략</h3>
+            <p>1. <strong>이미지 연상:</strong> 단어의 뜻을 그림으로 상상하세요.<br>
+               2. <strong>문장 활용:</strong> 'The economy showed great resilience.' 처럼 짧은 예문을 만들어보세요.<br>
+               3. <strong>반복 노출:</strong> 퀴즈를 통해 틀린 단어는 24시간 이내에 다시 확인하는 것이 망각 곡선을 극복하는 핵심입니다.</p>
+        </section>
+    </article>
+</div>
+
+<footer class="footer-links">
+    <p>© 2026 WordQuiz Master | <a href="#">개인정보처리방침</a> | <a href="#">이용약관</a> | <a href="#">문의하기</a></p>
+</footer>
+
 </body>
 </html>
