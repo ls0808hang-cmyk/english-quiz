@@ -49,6 +49,19 @@
         <div id="result-msg" class="result-msg"></div>
     </main>
 
+    <section id="review-section" style="margin-top: 40px; padding: 25px; background: #fff5f5; border-radius: 15px; border: 1px solid #feb2b2;">
+        <h2 style="color: #c53030; text-align: center;">📕 나만의 오답 노트</h2>
+        <p style="text-align: center; font-size: 0.9rem; color: #666;">틀린 단어들을 모아 복습해보세요. (브라우저에 자동 저장됩니다)</p>
+        
+        <div id="wrong-word-list" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <!-- Wrong words will be dynamically inserted here -->
+        </div>
+    
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="clearWrongWords()" style="background: #fc8181; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">오답 노트 전체 삭제</button>
+        </div>
+    </section>
+
     <section class="guide-section" style="margin-top: 50px; padding: 30px; background-color: #ffffff; border: 1px dashed #3498db; border-radius: 15px;">
         <h2 style="color: #2c3e50; text-align: center;">🚀 3분 만에 마스터하는 이용 방법</h2>
         

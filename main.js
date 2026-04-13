@@ -113,6 +113,9 @@ let currentIdx = 0;
 let studyCount = localStorage.getItem('todayCount') ? parseInt(localStorage.getItem('todayCount')) : 0;
 const DAILY_GOAL = 20; // 하루 목표 단어 수 (원하는 대로 수정 가능)
 
+// Wrong words persistence
+let wrongWords = localStorage.getItem('wrongWords') ? JSON.parse(localStorage.getItem('wrongWords')) : [];
+
 /**
  * Update the study stats displayed to the user
  */
@@ -124,6 +127,50 @@ function updateStats() {
   if (percentEl) {
     const progress = Math.min(Math.round((studyCount / DAILY_GOAL) * 100), 100);
     percentEl.innerText = progress;
+  }
+}
+
+/**
+ * Render the wrong words list in the UI
+ */
+function renderWrongWords() {
+  const container = document.getElementById('wrong-word-list');
+  if (!container) return;
+  
+  container.innerHTML = "";
+  if (wrongWords.length === 0) {
+    container.innerHTML = "<p style='color: #a0aec0; font-size: 0.9rem;'>아직 기록된 오답이 없습니다.</p>";
+    return;
+  }
+
+  wrongWords.forEach(wordObj => {
+    const badge = document.createElement('div');
+    badge.style.cssText = "background: #fff; border: 1px solid #feb2b2; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; color: #c53030; display: flex; align-items: center; gap: 8px;";
+    badge.innerHTML = `<strong>${wordObj.w}</strong>: ${wordObj.t}`;
+    
+    const playBtn = document.createElement('span');
+    playBtn.innerText = "🔊";
+    playBtn.style.cursor = "pointer";
+    playBtn.onclick = () => {
+      const utterance = new SpeechSynthesisUtterance(wordObj.w);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.8;
+      window.speechSynthesis.speak(utterance);
+    };
+    
+    badge.appendChild(playBtn);
+    container.appendChild(badge);
+  });
+}
+
+/**
+ * Clear the wrong words list
+ */
+function clearWrongWords() {
+  if (confirm("오답 노트를 모두 삭제하시겠습니까?")) {
+    wrongWords = [];
+    localStorage.removeItem('wrongWords');
+    renderWrongWords();
   }
 }
 
@@ -222,10 +269,19 @@ function checkAnswer(selected, correct, selectedBtn) {
     }, 1200);
   } else {
     // Incorrect UI
+    const quiz = wordDb[currentIdx];
     msg.innerText = "아쉬워요! 다시 한 번 생각해보세요. 🤔";
     msg.style.color = "#e74c3c";
     selectedBtn.style.backgroundColor = "#fdf2f2";
     selectedBtn.style.borderColor = "#e74c3c";
+    
+    // Add to wrongWords list if not already present
+    const isAlreadyAdded = wrongWords.some(item => item.w === quiz.w);
+    if (!isAlreadyAdded) {
+      wrongWords.push({ w: quiz.w, t: quiz.t });
+      localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
+      renderWrongWords();
+    }
     
     // Optional: Shake animation or temporary feedback
     selectedBtn.animate([
@@ -253,5 +309,6 @@ function speakWord() {
 // Initial load
 document.addEventListener('DOMContentLoaded', () => {
   updateStats();
+  renderWrongWords(); // Render the wrong words on load
   loadQuiz();
 });
