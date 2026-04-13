@@ -175,8 +175,11 @@ async function loadQuiz() {
     phoneticDisplay.innerText = phonetic;
   });
 
+  // Shuffle options for better variety
+  const shuffledOptions = [...quiz.o].sort(() => Math.random() - 0.5);
+
   // Create option buttons
-  quiz.o.forEach(opt => {
+  shuffledOptions.forEach(opt => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
     btn.innerText = opt;
