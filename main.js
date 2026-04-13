@@ -133,44 +133,47 @@ function updateStats() {
 /**
  * Render the wrong words list in the UI
  */
-function renderWrongWords() {
-  const container = document.getElementById('wrong-word-list');
-  if (!container) return;
+function displayWrongWords() {
+  const listDiv = document.getElementById('wrong-word-list');
+  if (!listDiv) return;
   
-  container.innerHTML = "";
+  listDiv.innerHTML = ""; // 기존 내용 비우기
+
   if (wrongWords.length === 0) {
-    container.innerHTML = "<p style='color: #a0aec0; font-size: 0.9rem;'>아직 기록된 오답이 없습니다.</p>";
+    listDiv.innerHTML = "<p style='color: #a0aec0;'>아직 틀린 단어가 없습니다. 완벽해요! 👍</p>";
     return;
   }
 
   wrongWords.forEach(wordObj => {
-    const badge = document.createElement('div');
-    badge.style.cssText = "background: #fff; border: 1px solid #feb2b2; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; color: #c53030; display: flex; align-items: center; gap: 8px;";
-    badge.innerHTML = `<strong>${wordObj.w}</strong>: ${wordObj.t}`;
-    
-    const playBtn = document.createElement('span');
-    playBtn.innerText = "🔊";
-    playBtn.style.cursor = "pointer";
-    playBtn.onclick = () => {
-      const utterance = new SpeechSynthesisUtterance(wordObj.w);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.8;
-      window.speechSynthesis.speak(utterance);
-    };
-    
-    badge.appendChild(playBtn);
-    container.appendChild(badge);
+    const item = document.createElement('div');
+    item.style.cssText = "background: white; padding: 10px 15px; border-radius: 8px; border: 1px solid #fecaca; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);";
+    item.innerHTML = `
+        <strong style="color: #e53e3e;">${wordObj.w}</strong> 
+        <span style="color: #718096; font-size: 0.85rem;">: ${wordObj.t}</span>
+        <button onclick="speakSpecificWord('${wordObj.w}')" style="background: none; border: none; cursor: pointer;">🔊</button>
+    `;
+    listDiv.appendChild(item);
   });
+}
+
+/**
+ * Speak a specific word from the wrong words list
+ */
+function speakSpecificWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = 'en-US';
+  utterance.rate = 0.8;
+  window.speechSynthesis.speak(utterance);
 }
 
 /**
  * Clear the wrong words list
  */
 function clearWrongWords() {
-  if (confirm("오답 노트를 모두 삭제하시겠습니까?")) {
+  if (confirm("오답 노트를 모두 비울까요?")) {
     wrongWords = [];
-    localStorage.removeItem('wrongWords');
-    renderWrongWords();
+    localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
+    displayWrongWords();
   }
 }
 
@@ -280,7 +283,7 @@ function checkAnswer(selected, correct, selectedBtn) {
     if (!isAlreadyAdded) {
       wrongWords.push({ w: quiz.w, t: quiz.t });
       localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
-      renderWrongWords();
+      displayWrongWords();
     }
     
     // Optional: Shake animation or temporary feedback
@@ -309,6 +312,6 @@ function speakWord() {
 // Initial load
 document.addEventListener('DOMContentLoaded', () => {
   updateStats();
-  renderWrongWords(); // Render the wrong words on load
+  displayWrongWords(); // Render the wrong words on load
   loadQuiz();
 });
