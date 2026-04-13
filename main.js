@@ -75,6 +75,17 @@ function updateStats() {
 }
 
 /**
+ * Reset the user's study progress
+ */
+function resetProgress() {
+  if (confirm("공부한 기록을 초기화하시겠습니까?")) {
+    studyCount = 0;
+    localStorage.removeItem('todayCount');
+    updateStats();
+  }
+}
+
+/**
  * Fetch phonetics from Free Dictionary API (optional enhancement)
  */
 async function fetchPhonetic(word) {

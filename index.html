@@ -15,9 +15,13 @@
         <p>인공지능 기반 실시간 사전 데이터를 활용한 맞춤형 퀴즈</p>
     </header>
 
-    <div style="display: flex; justify-content: space-around; background: #eef2f7; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-weight: bold; color: #2c3e50;">
+    <div style="display: flex; justify-content: space-around; align-items: center; background: #eef2f7; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-weight: bold; color: #2c3e50;">
         <div>오늘 공부한 단어: <span id="study-count" style="color: #3498db; font-size: 1.2rem;">0</span>개</div>
         <div>목표 달성률: <span id="progress-percent" style="color: #2ecc71;">0</span>%</div>
+        
+        <button onclick="resetProgress()" style="background: #bdc3c7; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: background 0.2s;">
+            기록 초기화
+        </button>
     </div>
 
     <main class="word-card">
