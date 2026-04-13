@@ -278,13 +278,14 @@ function checkAnswer(selected, correct, selectedBtn) {
     selectedBtn.style.backgroundColor = "#fdf2f2";
     selectedBtn.style.borderColor = "#e74c3c";
     
-    // Add to wrongWords list if not already present
-    const isAlreadyAdded = wrongWords.some(item => item.w === quiz.w);
-    if (!isAlreadyAdded) {
+    // --- 오답 노트 저장 로직 추가 ---
+    // 이미 저장된 단어인지 확인 후 없으면 추가
+    if (!wrongWords.some(item => item.w === quiz.w)) {
       wrongWords.push({ w: quiz.w, t: quiz.t });
       localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
-      displayWrongWords();
+      displayWrongWords(); // 화면 업데이트
     }
+    // ------------------------------
     
     // Optional: Shake animation or temporary feedback
     selectedBtn.animate([
