@@ -57,7 +57,10 @@
             <!-- Wrong words will be dynamically inserted here -->
         </div>
     
-        <div style="text-align: center; margin-top: 20px;">
+        <div style="text-align: center; margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+            <button id="retry-btn" onclick="startReviewMode()" style="background: #e53e3e; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; display: none;">
+                🔥 오답들만 다시 시험보기
+            </button>
             <button onclick="clearWrongWords()" style="background: #fc8181; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">오답 노트 전체 삭제</button>
         </div>
     </section>

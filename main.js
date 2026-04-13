@@ -116,17 +116,26 @@ const DAILY_GOAL = 20; // 하루 목표 단어 수 (원하는 대로 수정 가�
 // Wrong words persistence
 let wrongWords = localStorage.getItem('wrongWords') ? JSON.parse(localStorage.getItem('wrongWords')) : [];
 
+let isReviewMode = false;
+let reviewIdx = 0;
+
 /**
  * Update the study stats displayed to the user
  */
 function updateStats() {
   const countEl = document.getElementById('study-count');
   const percentEl = document.getElementById('progress-percent');
+  const retryBtn = document.getElementById('retry-btn');
   
   if (countEl) countEl.innerText = studyCount;
   if (percentEl) {
     const progress = Math.min(Math.round((studyCount / DAILY_GOAL) * 100), 100);
     percentEl.innerText = progress;
+  }
+
+  // Show retry button if there are wrong words
+  if (retryBtn) {
+    retryBtn.style.display = wrongWords.length > 0 ? "inline-block" : "none";
   }
 }
 
@@ -208,7 +217,28 @@ async function fetchPhonetic(word) {
  * Load the current quiz item
  */
 async function loadQuiz() {
-  const quiz = wordDb[currentIdx];
+  let quiz;
+  
+  if (isReviewMode && wrongWords.length > 0) {
+    // Review mode logic
+    const reviewItem = wrongWords[reviewIdx];
+    // Create a mock quiz object for compatibility
+    quiz = {
+      w: reviewItem.w,
+      t: reviewItem.t,
+      // Pick 3 random distractor meanings from wordDb
+      o: [reviewItem.t, ...wordDb
+          .filter(item => item.t !== reviewItem.t)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 3)
+          .map(item => item.t)]
+    };
+  } else {
+    // Normal mode logic
+    isReviewMode = false; // Just in case
+    quiz = wordDb[currentIdx];
+  }
+
   const targetWord = document.getElementById('target-word');
   const phoneticDisplay = document.getElementById('phonetic');
   const resultMsg = document.getElementById('result-msg');
@@ -217,7 +247,7 @@ async function loadQuiz() {
   // Reset UI
   targetWord.innerText = quiz.w;
   phoneticDisplay.innerText = "Loading phonetics...";
-  resultMsg.innerText = "";
+  resultMsg.innerText = isReviewMode ? "🔥 오답 복습 모드 진행 중" : "";
   optionsDiv.innerHTML = "";
 
   // Async fetch phonetic for better feel
@@ -237,6 +267,19 @@ async function loadQuiz() {
     btn.onclick = () => checkAnswer(opt, quiz.t, btn);
     optionsDiv.appendChild(btn);
   });
+}
+
+/**
+ * Enter Review Mode
+ */
+function startReviewMode() {
+  if (wrongWords.length === 0) return;
+  alert("틀렸던 단어들만 모아 다시 시험을 시작합니다! 화이팅! 🚀");
+  isReviewMode = true;
+  reviewIdx = 0;
+  loadQuiz();
+  // Scroll to quiz card
+  document.querySelector('.word-card').scrollIntoView({ behavior: 'smooth' });
 }
 
 /**
@@ -267,8 +310,26 @@ function checkAnswer(selected, correct, selectedBtn) {
 
     // Auto load next quiz after slightly shorter delay
     setTimeout(() => {
-      currentIdx = (currentIdx + 1) % wordDb.length;
-      loadQuiz();
+      if (isReviewMode) {
+        // If answered correctly in review mode, remove from wrong words
+        const correctWord = quiz.w;
+        wrongWords = wrongWords.filter(item => item.w !== correctWord);
+        localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
+        displayWrongWords();
+        updateStats(); // Button might hide
+
+        if (wrongWords.length === 0) {
+          alert("모든 오답을 마스터했습니다! 대단해요! 🏆");
+          isReviewMode = false;
+          loadQuiz(); // Back to normal
+        } else {
+          reviewIdx = reviewIdx % wrongWords.length;
+          loadQuiz();
+        }
+      } else {
+        currentIdx = (currentIdx + 1) % wordDb.length;
+        loadQuiz();
+      }
     }, 1200);
   } else {
     // Incorrect UI
