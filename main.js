@@ -101,6 +101,18 @@ function checkAnswer(selected, correct, btn) {
   }
 }
 
+/**
+ * Speak the current word using Web Speech API
+ */
+function speakWord() {
+  const word = document.getElementById('target-word').innerText;
+  if (word && word !== "Loading...") {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-US';
+    window.speechSynthesis.speak(utterance);
+  }
+}
+
 // Initial load
 document.addEventListener('DOMContentLoaded', () => {
   loadQuiz();
