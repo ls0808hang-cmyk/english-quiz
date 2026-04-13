@@ -108,7 +108,8 @@ function speakWord() {
   const word = document.getElementById('target-word').innerText;
   if (word && word !== "Loading...") {
     const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = 'en-US';
+    utterance.lang = 'en-US'; // 미국식 영어 발음
+    utterance.rate = 0.8;    // 속도를 약간 느리게 (학습용)
     window.speechSynthesis.speak(utterance);
   }
 }
