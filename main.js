@@ -57,8 +57,8 @@ const wordDb = [
 ];
 
 let currentIdx = 0;
-let studyCount = 0;
-const DAILY_GOAL = 10; // 목표 단어 수
+let studyCount = localStorage.getItem('todayCount') ? parseInt(localStorage.getItem('todayCount')) : 0;
+const DAILY_GOAL = 20; // 하루 목표 단어 수 (원하는 대로 수정 가능)
 
 /**
  * Update the study stats displayed to the user
@@ -130,7 +130,8 @@ function checkAnswer(selected, correct, btn) {
   if (selected === correct) {
     // Correct UI
     studyCount++;
-    updateStats();
+    localStorage.setItem('todayCount', studyCount); // 브라우저에 저장
+    updateStats(); // 화면 업데이트
     msg.innerText = "정답입니다! 훌륭해요! 🎉";
     msg.style.color = "#2ecc71";
     btn.style.backgroundColor = "#e8fdf0";
@@ -176,5 +177,6 @@ function speakWord() {
 
 // Initial load
 document.addEventListener('DOMContentLoaded', () => {
+  updateStats();
   loadQuiz();
 });
