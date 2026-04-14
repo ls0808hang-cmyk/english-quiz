@@ -11,6 +11,10 @@ A web-based multiple-choice English vocabulary quiz. Designed to help users impr
     - Asynchronous phonetic fetching from `api.dictionaryapi.dev`.
     - Modern design with grid layout and interactive feedback (color changes, animations).
     - Educational content section for "AdSense optimization" and learning tips.
+- **SEO & Analytics:**
+    - Google Site Verification: Active.
+    - Naver Site Verification: Active.
+    - Meta tags for description, keywords, and Open Graph.
 - **Design:** Modern "card-based" UI, clean spacing, primary color: `#3498db`.
 
 ## Plan & Steps for Current Requested Change

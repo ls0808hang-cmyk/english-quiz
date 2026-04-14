@@ -3,208 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마스터 영단어 퀴즈 - 매일 5분 영어 실력 향상</title>
+    <title>WordQuiz Master - 깔끔한 영단어 학습</title>
     <meta name="google-site-verification" content="jjUP-h5131693XFOW3Wq83fwOdeY9rdd6nTsTo-AAXI" />
+    <meta name="naver-site-verification" content="1d3f105a4b261118541248faa233d200d986b469" />
     <meta name="description" content="무료 사전 API 기반 영단어 퀴즈로 매일 5분 영어 실력 향상! Resilience 등 필수 단어 암기법과 학습 가이드를 제공합니다.">
     <meta name="keywords" content="영단어 퀴즈, 영어 공부, 단어 암기법, 무료 영어 학습, 토익 영단어">
     <meta property="og:title" content="WordQuiz Master - 오늘의 영단어 퀴즈">
     <meta property="og:description" content="과학적인 암기법과 함께 즐기는 실시간 영단어 퀴즈 서비스">
     <meta property="og:type" content="website">
     <link rel="canonical" href="english-quiz.pages.dev">
+    
     <link rel="stylesheet" href="style.css">
     <script defer src="main.js"></script>
 </head>
 <body>
 
-<div class="main-container">
+<div id="toast">메시지가 여기에 표시됩니다.</div>
+
+<div class="container">
+    <!-- SEO Hidden Content -->
     <div style="display: none;">
         <h2>매일 업데이트되는 영단어 퀴즈와 과학적 암기 전략</h2>
         <p>WordQuiz Master는 무료 사전 API를 활용하여 Resilience, Accomplish 등 필수 영단어를 퀴즈 형식으로 제공합니다. 에빙하우스 망각 곡선을 기반으로 한 능동적 회상 학습법을 통해 영단어를 장기 기억으로 전환하세요.</p>
     </div>
-    <header class="quiz-header">
-        <h1>📝 오늘의 마스터 영단어</h1>
-        <p>인공지능 기반 실시간 사전 데이터를 활용한 맞춤형 퀴즈</p>
-    </header>
 
-    <div style="display: flex; justify-content: space-around; align-items: center; background: #eef2f7; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-weight: bold; color: #2c3e50;">
-        <div>오늘 공부한 단어: <span id="study-count" style="color: #3498db; font-size: 1.2rem;">0</span>개</div>
-        <div>목표 달성률: <span id="progress-percent" style="color: #2ecc71;">0</span>%</div>
-        
-        <button onclick="resetProgress()" style="background: #bdc3c7; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; transition: background 0.2s;">
-            기록 초기화
-        </button>
+    <!-- Stats Header -->
+    <div class="stats-header">
+        <div class="stats-item">오늘 공부한 단어: <strong id="study-count">0</strong>개 (<span id="progress-percent">0</span>%)</div>
+        <button onclick="resetProgress()" class="reset-link">기록 초기화</button>
     </div>
 
-    <main class="word-card">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-            <div id="target-word" class="word-text">Loading...</div>
-            <button onclick="speakWord()" style="background: none; border: none; font-size: 2rem; cursor: pointer;">🔊</button>
-        </div>
-        <div id="phonetic" class="phonetic"></div>
+    <!-- Quiz Card -->
+    <main class="card quiz-container">
+        <h1 class="quiz-header-title" id="quiz-header-text">오늘의 마스터 영단어</h1>
+        <p class="quiz-subtitle">인공지능 기반 실시간 사전 데이터를 활용한 맞춤형 퀴즈</p>
         
+        <div class="word-display-area">
+            <div class="target-word-display" id="target-word">Loading...</div>
+            <button onclick="speakWord()" class="speak-btn" aria-label="발음 듣기">🔊</button>
+        </div>
+        <div class="phonetic-display" id="phonetic">/Loading.../</div>
+
         <div class="options-grid" id="options">
             <!-- Options will be dynamically inserted here -->
         </div>
-        
-        <div id="result-msg" class="result-msg"></div>
+        <div class="feedback-msg" id="result-msg"></div>
     </main>
 
-    <section id="review-section" style="margin-top: 40px; padding: 25px; background: #fff5f5; border-radius: 15px; border: 1px solid #feb2b2;">
-        <h2 style="color: #c53030; text-align: center;">📕 나만의 오답 노트</h2>
-        <p style="text-align: center; font-size: 0.9rem; color: #666;">틀린 단어들을 모아 복습해보세요. (브라우저에 자동 저장됩니다)</p>
+    <!-- Review Card -->
+    <section id="review-section" class="card">
+        <h2 class="section-title">📕 나만의 오답 노트</h2>
+        <p class="wrong-list-desc">틀린 단어들을 모아 복습해보세요. (브라우저에 자동 저장됩니다)</p>
         
-        <div id="wrong-word-list" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+        <div id="wrong-word-list" class="wrong-list">
             <!-- Wrong words will be dynamically inserted here -->
         </div>
     
-        <div style="text-align: center; margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
-            <button id="retry-btn" onclick="startReviewMode()" style="background: #e53e3e; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; display: none;">
+        <div class="review-action-area">
+            <button id="retry-btn" onclick="startReviewMode()" class="retry-btn" style="display: none;">
                 🔥 오답들만 다시 시험보기
             </button>
-            <button onclick="clearWrongWords()" style="background: #fc8181; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">오답 노트 전체 삭제</button>
+            <button onclick="clearWrongWords()" class="clear-wrongs-link">
+                오답 노트 전체 삭제
+            </button>
         </div>
     </section>
 
-    <section class="guide-section" style="margin-top: 50px; padding: 30px; background-color: #ffffff; border: 1px dashed #3498db; border-radius: 15px;">
-        <h2 style="color: #2c3e50; text-align: center;">🚀 3분 만에 마스터하는 이용 방법</h2>
-        
-        <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
-            <div style="display: flex; align-items: flex-start; gap: 15px;">
-                <span style="background: #3498db; color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: bold;">1</span>
-                <p style="margin: 0;"><strong>단어 확인 및 발음 듣기:</strong> 화면 중앙에 나타난 영단어를 확인하세요. 옆에 있는 <strong>스피커(🔊) 버튼</strong>을 누르면 원어민 발음을 들으며 정확한 소리를 익힐 수 있습니다.</p>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: 15px;">
-                <span style="background: #3498db; color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: bold;">2</span>
-                <p style="margin: 0;"><strong>정답 선택하기:</strong> 아래 제공된 4개의 보기 중 가장 알맞은 한국어 뜻을 클릭하세요. 정답을 맞히면 다음 단어로 자동으로 넘어갑니다.</p>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: 15px;">
-                <span style="background: #3498db; color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: bold;">3</span>
-                <p style="margin: 0;"><strong>심화 학습하기:</strong> 퀴즈 아래 준비된 <strong>'시각 자료'</strong>와 <strong>'전문 학습 칼럼'</strong>을 읽어보세요. 단어의 유래와 효율적인 암기법까지 한 번에 배울 수 있습니다.</p>
-            </div>
-        </div>
-
-        <blockquote style="margin-top: 25px; padding: 15px; background: #f0f7ff; border-left: 5px solid #3498db; font-style: italic; color: #555;">
-            "단순히 맞히는 것보다, 소리 내어 따라 읽는 것이 기억력 향상에 5배 더 효과적입니다!"
-        </blockquote>
+    <!-- Guide Card -->
+    <section class="card">
+        <h2 class="info-title">🚀 3분 이용 가이드</h2>
+        <ul class="guide-list">
+            <li><strong>단어 확인 및 발음 듣기:</strong> 화면 중앙에 나타난 영단어를 확인하고 스피커 버튼을 눌러 정확한 소리를 익히세요.</li>
+            <li><strong>정답 선택하기:</strong> 4개의 보기 중 가장 알맞은 한국어 뜻을 클릭하세요.</li>
+            <li><strong>오답 복습:</strong> 틀린 단어는 하단 <b>오답 노트</b>에 자동으로 저장되며, 언제든지 다시 시험 볼 수 있습니다.</li>
+            <li><strong>데이터 저장:</strong> 모든 학습 데이터는 사용자님의 브라우저에만 안전하게 저장됩니다.</li>
+        </ul>
     </section>
 
-    <section class="visual-learning-section" style="margin-top: 50px; padding: 30px; background-color: #f9f9f9; border-radius: 20px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);">
-        <h3 style="text-align: center; color: #2c3e50; margin-bottom: 10px;">다양한 시각 자료와 함께하는 몰입형 학습</h3>
-        <p style="text-align: center; color: #666; margin-bottom: 35px; font-size: 0.95rem;">이미지를 통한 연상 학습은 텍스트만 읽을 때보다 기억 유지력을 300% 향상시킵니다.</p>
+    <!-- Gallery Card -->
+    <section class="card">
+        <h3 class="info-title">🖼️ 시각 자료와 함께하는 학습</h3>
+        <p style="text-align:center; color:#666; font-size:0.95rem; margin-top:-20px; margin-bottom:30px;">
+            맥락이 있는 이미지 학습은 기억 유지력을 3배 이상 향상시킵니다.
+        </p>
         
-        <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px;">
-            
-            <div class="gallery-item" style="text-align: center; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-                <img src="quiz1.jpg" 
-                     alt="토익 및 수능 필수 영단어 교재와 학습 자료 모음" 
-                     title="영단어 학습 자료"
-                     style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
-                <span style="display: block; margin-top: 12px; font-size: 0.9rem; color: #444; font-weight: 600;">다양한 주제의 학습 자료</span>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="quiz1.jpg" alt="다양한 주제의 학습 자료">
+                <span>학습 자료 모음</span>
             </div>
-            
-            <div class="gallery-item" style="text-align: center; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-                <img src="quiz2.jpg" 
-                     alt="기초 영단어 ABC 블록과 사과를 이용한 어린이 영어 교육 이미지" 
-                     title="기초 영단어 교육"
-                     style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
-                <span style="display: block; margin-top: 12px; font-size: 0.9rem; color: #444; font-weight: 600;">기초부터 탄탄하게</span>
+            <div class="gallery-item">
+                <img src="quiz2.jpg" alt="기초부터 탄탄하게">
+                <span>기초 탄탄</span>
             </div>
-            
-            <div class="gallery-item" style="text-align: center; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-                <img src="quiz3.jpg" 
-                     alt="CHOOSE YOUR WORDS 영단어 선택의 중요성을 강조하는 교육용 보드게임" 
-                     title="어휘 선택의 중요성"
-                     style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
-                <span style="display: block; margin-top: 12px; font-size: 0.9rem; color: #444; font-weight: 600;">어휘 선택의 중요성</span>
+            <div class="gallery-item">
+                <img src="quiz3.jpg" alt="어휘 선택의 중요성">
+                <span>어휘 선택</span>
             </div>
-            
-            <div class="gallery-item" style="text-align: center; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-                <img src="quiz4.jpg" 
-                     alt="미국 영국 국기 테마 상자가 놓인 글로벌 영어 학습 환경 디자인" 
-                     title="글로벌 영어 학습"
-                     style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
-                <span style="display: block; margin-top: 12px; font-size: 0.9rem; color: #444; font-weight: 600;">글로벌 어휘 학습</span>
+            <div class="gallery-item">
+                <img src="quiz4.jpg" alt="글로벌 영어 학습 환경">
+                <span>글로벌 학습</span>
             </div>
-    
         </div>
     </section>
 
-    <article class="content-section">
-        <div class="blog-post">
-            <h2>효과적인 영단어 암기를 위한 과학적 접근법: 뇌를 속이는 3가지 기술</h2>
-            <p>단순히 영단어를 반복해서 쓰는 것만으로는 장기 기억으로 전환되기 어렵습니다. 우리 뇌는 '중요하지 않다'고 판단되는 정보는 빠르게 삭제하기 때문입니다. 애드센스가 권장하는 고품질 정보로서, 과학적으로 증명된 효과적인 단어 암기 전략을 소개합니다.</p>
-        
-            <h3>1. 에빙하우스의 망각 곡선과 간격 반복(Spaced Repetition)</h3>
-            <p>독일의 심리학자 헤르만 에빙하우스에 따르면, 인간은 학습 후 20분 만에 42%를 잊어버리고, 한 달 뒤에는 80%를 망각합니다. 이를 극복하는 유일한 방법은 <strong>'적절한 타이밍의 복습'</strong>입니다. 퀴즈를 통해 학습한 단어를 10분 후, 1일 후, 7일 후 다시 확인하는 간격 반복 학습법은 단기 기억을 장기 기억으로 옮기는 가장 확실한 방법입니다.</p>
-            
-            <h3>2. 능동적 회상(Active Recall)의 힘</h3>
-            <p>단어장을 눈으로 읽기만 하는 것은 '익숙함'을 '실력'으로 착각하게 만듭니다. 반면, 본 서비스와 같은 <strong>퀴즈 형식</strong>은 뇌가 정보를 기억 속에서 직접 끄집어내도록 유도합니다. 이 과정에서 뉴런 사이의 연결이 강화되며, 실제로 시험이나 대화 상황에서 단어를 더 빠르게 떠올릴 수 있게 됩니다.</p>
-        
-            <h3>3. 맥락과 함께 암기하는 에피소드 기억</h3>
-            <p>단어 하나만 외우기보다 문장 속에서 어떻게 쓰이는지 확인하는 것이 중요합니다. 예를 들어 'Resilience'라는 단어를 외울 때, "The business showed resilience during the crisis."와 같은 실제 예문을 함께 보면 단어의 '느낌'과 '뉘앙스'가 뇌에 더 강렬하게 각인됩니다. 이는 단순 암기보다 훨씬 오래 지속되는 <strong>'에피소드 기억'</strong>으로 저장되기 때문입니다.</p>
+    <!-- FAQ Card -->
+    <section class="card">
+        <h2 class="info-title">🤔 자주 묻는 질문 (FAQ)</h2>
+        <div class="faq-item">
+            <span class="faq-q">Q. 사전 API는 어떻게 활용되나요?</span>
+            <span class="faq-a">무료 사전 API를 연결하여 정확한 발음 기호, 예문 등을 실시간으로 가져와 학습 정보로 제공합니다.</span>
         </div>
-        
-        <div class="blog-post" style="background: #f0f7ff; padding: 20px; border-radius: 10px;">
-            <h3>💡 WordQuiz Master를 200% 활용하는 팁</h3>
-            <ul>
-                <li><strong>하루 5분, 꾸준함의 승리:</strong> 한 번에 100개를 외우는 것보다 매일 5개씩 퀴즈를 푸는 것이 뇌의 가소성을 높이는 데 효과적입니다.</li>
-                <li><strong>소리 내어 읽기:</strong> 정답을 확인한 후에는 반드시 입으로 직접 발음해 보세요. 시각과 청각을 동시에 자극하면 암기 효율이 극대화됩니다.</li>
-                <li><strong>나만의 단어장 만들기:</strong> 퀴즈에서 틀린 단어는 따로 메모해 두었다가 다음 날 가장 먼저 다시 풀어보세요.</li>
-            </ul>
-            <p>저희 WordQuiz Master는 여러분의 효율적인 영어 학습을 위해 실시간 사전 API를 기반으로 가장 정확하고 유용한 데이터를 제공하기 위해 노력하고 있습니다. 꾸준한 학습으로 영어 마스터의 길에 가까워지시길 바랍니다!</p>
+        <div class="faq-item">
+            <span class="faq-q">Q. 공부한 기록은 어디에 저장되나요?</span>
+            <span class="faq-a">사용자님의 브라우저 저장소(LocalStorage)에만 안전하게 저장되며, 구글 서버에는 기록되지 않습니다.</span>
         </div>
-    </article>
-</div>
+        <div class="faq-item">
+            <span class="faq-q">Q. 오답 모드는 언제 시작하나요?</span>
+            <span class="faq-a">틀린 단어가 쌓이면 '오답들만 다시 시험보기' 버튼이 활성화되어 복습 시험을 볼 수 있습니다.</span>
+        </div>
+    </section>
 
-    <section class="faq-section" style="margin-top: 50px; padding: 30px; border-top: 2px solid #eee;">
-        <h2 style="color: #2c3e50; text-align: center; margin-bottom: 30px;">🤔 자주 묻는 질문 (FAQ)</h2>
-    
-        <div style="display: flex; flex-direction: column; gap: 25px;">
-            <div style="background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #e1e8ed;">
-                <p style="font-weight: bold; color: #3498db; margin-bottom: 10px;">Q1. 영단어 퀴즈 서비스는 정말 무료인가요?</p>
-                <p style="margin: 0; color: #555;">네, WordQuiz Master에서 제공하는 모든 영어 단어 학습 서비스와 발음 듣기 기능은 100% 무료입니다. 학습자분들이 경제적 부담 없이 기초부터 고급 어휘까지 마스터할 수 있도록 돕는 것이 저희의 목표입니다.</p>
-            </div>
-    
-            <div style="background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #e1e8ed;">
-                <p style="font-weight: bold; color: #3498db; margin-bottom: 10px;">Q2. 단어 데이터는 얼마나 자주 업데이트되나요?</p>
-                <p style="margin: 0; color: #555;">저희 서비스는 토익, 수능, 일상 회화에 자주 등장하는 단어들을 선별하여 리스트를 구성하고 있습니다. 현재 100개 이상의 핵심 단어가 등록되어 있으며, 주기적으로 새로운 단어 테마와 학습 자료를 업데이트하여 풍부한 학습 환경을 제공할 예정입니다.</p>
-            </div>
-    
-            <div style="background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #e1e8ed;">
-                <p style="font-weight: bold; color: #3498db; margin-bottom: 10px;">Q3. 발음 듣기 기능이 작동하지 않을 때는 어떻게 하나요?</p>
-                <p style="margin: 0; color: #555;">본 서비스의 스피커 버튼(🔊)은 웹 브라우저의 기본 음성 합성 기술(TTS)을 사용합니다. 소리가 들리지 않는다면 브라우저 볼륨 설정이나 기기의 소리 출력 상태를 확인해 주세요. 크롬(Chrome)이나 사파리(Safari) 최신 버전에 최적화되어 있습니다.</p>
-            </div>
-    
-            <div style="background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #e1e8ed;">
-                <p style="font-weight: bold; color: #3498db; margin-bottom: 10px;">Q4. 초보자도 효과적으로 암기할 수 있는 팁이 있나요?</p>
-                <p style="margin: 0; color: #555;">네, 가능합니다! 퀴즈를 풀 때 단순히 눈으로만 보지 말고, 제공되는 소리 기능을 활용해 입으로 따라 읽어보세요. 또한 저희 사이트 하단의 '이미지 갤러리'를 통해 시각적 자극을 함께 주면 기억 유지력이 훨씬 길어집니다.</p>
-            </div>
-    
-            <div style="background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #e1e8ed;">
-                <p style="font-weight: bold; color: #3498db; margin-bottom: 10px;">Q5. 학습 기록 초기화는 언제 사용하는 것이 좋은가요?</p>
-                <p style="margin: 0; color: #555;">'기록 초기화' 기능은 새로운 마음으로 하루 학습을 시작하고 싶을 때 사용하시면 좋습니다. 특히 매일 아침 초기화를 통해 목표 달성률을 0%에서 100%까지 채워나가는 과정은 학습 동기 부여에 큰 도움이 됩니다.</p>
-            </div>
-        </div>
+    <!-- Article Card -->
+    <section class="card article-section">
+        <h2>효과적인 영단어 암기를 위한 과학적 접근법: 뇌를 속이는 3가지 기술</h2>
+        <p>단순히 영단어를 반복해서 쓰는 것만으로는 장기 기억으로 전환되기 어렵습니다. 우리 뇌는 '중요하지 않다'고 판단되는 정보는 빠르게 삭제하기 때문입니다. 애드센스가 권장하는 고품질 정보로서, 과학적으로 증명된 효과적인 단어 암기 전략을 소개합니다.</p>
+        
+        <h3>1. 에빙하우스의 망각 곡선과 간격 반복(Spaced Repetition)</h3>
+        <p>독일의 심리학자 헤르만 에빙하우스에 따르면, 인간은 학습 후 20분 만에 42%를 잊어버리고, 한 달 뒤에는 80%를 망각합니다. 이를 극복하는 유일한 방법은 <strong>'적절한 타이밍의 복습'</strong>입니다.</p>
+        
+        <h3>2. 능동적 회상(Active Recall)의 힘</h3>
+        <p>단어장을 눈으로 읽기만 하는 것은 '익숙함'을 '실력'으로 착각하게 만듭니다. 반면, 본 서비스와 같은 <strong>퀴즈 형식</strong>은 뇌가 정보를 기억 속에서 직접 끄집어내도록 유도합니다.</p>
+        
+        <h3>3. 맥락과 함께 암기하는 에피소드 기억</h3>
+        <p>단어 하나만 외우기보다 문장 속에서 어떻게 쓰이는지 확인하는 것이 중요합니다. Resilience 같은 단어도 예문을 통해 뉘앙스를 함께 익히면 단순 암기보다 훨씬 오래 지속됩니다.</p>
     </section>
 
     <div class="seo-footer" style="margin-top: 40px; font-size: 0.85rem; color: #999; border-top: 1px solid #eee; padding-top: 20px;">
         <strong>인기 학습 키워드:</strong>
         <span>비즈니스 영어</span> | <span>기초 영단어</span> | <span>수능 필수 어휘</span> | <span>효과적인 암기법</span> | <span>무료 영어 퀴즈</span>
     </div>
+</div>
 
-    <footer class="footer-links" style="text-align: center; margin-top: 50px; padding: 30px; border-top: 1px solid #eee; color: #718096;">
-        <p>© 2026 WordQuiz Master | 모든 권리 보유</p>
-        <p>
-           <a href="about.html" style="color: #3498db; font-weight: bold; text-decoration: none;">사이트 소개</a> | 
-           <a href="privacy.html" style="text-decoration: none; color: #718096;">개인정보처리방침</a> | 
-           <a href="terms.html" style="text-decoration: none; color: #718096;">이용약관</a>
-        </p>
-        <div style="margin-top: 15px; font-size: 0.9rem;">
-            문의: <a href="mailto:upshop79@gmail.com" style="color: #3498db; text-decoration: none;">upshop79@gmail.com</a>
-        </div>
-    </footer>
+<footer class="footer">
+    <p>© 2026 WordQuiz Master | 모든 권리 보유</p>
+    <p>
+       <a href="about.html">사이트 소개</a> | 
+       <a href="privacy.html">개인정보처리방침</a> | 
+       <a href="terms.html">이용약관</a>
+    </p>
+    <div style="margin-top: 15px; font-size: 0.9rem;">
+        문의: <a href="mailto:upshop79@gmail.com">upshop79@gmail.com</a>
+    </div>
+</footer>
 
 </body>
 </html>
