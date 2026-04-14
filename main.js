@@ -323,8 +323,12 @@ async function loadQuiz() {
   const resultMsg = document.getElementById('result-msg');
   const optionsDiv = document.getElementById('options');
 
-  // Reset UI
+  // Reset UI and add animation
   targetWord.innerText = quiz.w;
+  targetWord.classList.remove('new-word-anim');
+  void targetWord.offsetWidth; // Trigger reflow
+  targetWord.classList.add('new-word-anim');
+
   phoneticDisplay.innerText = "Loading phonetics...";
   resultMsg.innerText = "";
   optionsDiv.innerHTML = "";
@@ -378,7 +382,12 @@ function loadReviewQuiz() {
   const optionsDiv = document.getElementById('options');
   const phoneticDisplay = document.getElementById('phonetic');
 
+  // Reset UI and add animation
   targetWord.innerText = quiz.w;
+  targetWord.classList.remove('new-word-anim');
+  void targetWord.offsetWidth; // Trigger reflow
+  targetWord.classList.add('new-word-anim');
+
   resultMsg.innerText = "";
   optionsDiv.innerHTML = "";
   
@@ -417,10 +426,10 @@ function checkAnswer(selected, correct, selectedBtn) {
     msg.innerText = "정답입니다! 훌륭해요! 🎉";
     msg.style.color = "#2ecc71";
     
-    // Highlight correct button
+    // Highlight correct button with animation
     allBtns.forEach(btn => {
       if (btn.innerText === correct) {
-        btn.classList.add('correct');
+        btn.classList.add('correct-anim');
       }
       btn.disabled = true; // Disable all to prevent double-clicks
     });
@@ -434,7 +443,11 @@ function checkAnswer(selected, correct, selectedBtn) {
     // Incorrect UI
     msg.innerText = "아쉬워요! 다시 한 번 생각해보세요. 🤔";
     msg.style.color = "#e74c3c";
-    selectedBtn.classList.add('wrong');
+    
+    // Trigger shake animation
+    selectedBtn.classList.remove('wrong-anim');
+    void selectedBtn.offsetWidth; // Trigger reflow
+    selectedBtn.classList.add('wrong-anim');
     
     // --- 오답 노트 저장 로직 추가 ---
     // 이미 저장된 단어인지 확인 후 없으면 추가
@@ -443,15 +456,6 @@ function checkAnswer(selected, correct, selectedBtn) {
       localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
       displayWrongWords(); // 화면 업데이트
     }
-    // ------------------------------
-    
-    // Optional: Shake animation or temporary feedback
-    selectedBtn.animate([
-      { transform: 'translateX(0)' },
-      { transform: 'translateX(-5px)' },
-      { transform: 'translateX(5px)' },
-      { transform: 'translateX(0)' }
-    ], { duration: 200, iterations: 2 });
   }
 }
 
@@ -460,7 +464,7 @@ function checkReviewAnswer(selected, correct, selectedBtn) {
   const allBtns = document.querySelectorAll('.opt-btn');
   
   if(selected === correct) {
-      selectedBtn.classList.add('correct');
+      selectedBtn.classList.add('correct-anim');
       allBtns.forEach(btn => btn.disabled = true);
       
       setTimeout(() => {
@@ -477,18 +481,15 @@ function checkReviewAnswer(selected, correct, selectedBtn) {
               alert("모든 오답을 마스터했습니다! 대단해요! 🏆");
               location.reload(); // 원래 모드로 복귀 (새로고침)
           }
-      }, 500);
+      }, 600);
   } else {
-      selectedBtn.classList.add('wrong');
-      selectedBtn.animate([
-        { transform: 'translateX(0)' },
-        { transform: 'translateX(-5px)' },
-        { transform: 'translateX(5px)' },
-        { transform: 'translateX(0)' }
-      ], { duration: 200, iterations: 2 });
+      selectedBtn.classList.remove('wrong-anim');
+      void selectedBtn.offsetWidth; // Trigger reflow
+      selectedBtn.classList.add('wrong-anim');
+      
       setTimeout(() => {
           alert("아직 조금 더 공부가 필요해요! 다시 도전해보세요.");
-          selectedBtn.classList.remove('wrong');
+          selectedBtn.classList.remove('wrong-anim');
       }, 500);
   }
 }
