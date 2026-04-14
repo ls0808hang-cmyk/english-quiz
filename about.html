@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - WordQuiz Master</title>
+    <title>사이트 소개 - WordQuiz Master</title>
+    <meta name="description" content="WordQuiz Master는 과학적 암기법을 기반으로 한 무료 영단어 퀴즈 서비스입니다. 운영자 정보와 서비스 소개를 확인하세요.">
     <style>
-        body { font-family: 'Apple SD Gothic Neo', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; padding: 40px; background-color: #f4f7f6; }
+        body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; padding: 40px 20px; background-color: #f4f7f6; }
         .content-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         h1 { color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
         h2 { color: #2c3e50; margin-top: 30px; }
-        .contact-info { background: #e8f4fd; padding: 20px; border-radius: 10px; border-left: 5px solid #3498db; margin-top: 30px; }
-        .back-btn { display: inline-block; margin-top: 30px; text-decoration: none; color: #3498db; font-weight: bold; }
+        .highlight-box { background: #e8f4fd; padding: 20px; border-radius: 10px; border-left: 5px solid #3498db; margin: 20px 0; }
+        .contact-info { background: #eafaf1; padding: 20px; border-radius: 10px; border-left: 5px solid #2ecc71; margin-top: 30px; }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { padding: 8px 0; padding-left: 28px; position: relative; }
+        .feature-list li::before { content: "✅"; position: absolute; left: 0; }
+        .update-info { font-size: 0.9rem; color: #888; margin-top: 30px; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
 <body>
@@ -19,15 +24,33 @@
         <p>반갑습니다! <strong>WordQuiz Master</strong>는 효율적인 영어 학습을 꿈꾸는 모든 분들을 위해 탄생한 스마트 단어 학습 플랫폼입니다.</p>
 
         <h2>우리의 미션</h2>
-        <p>단순히 단어를 외우는 것을 넘어, 과학적인 근거(에빙하우스 망각 곡선)와 시각적 자극을 결합하여 <strong>'잊히지 않는 학습 경험'</strong>을 제공하는 것이 우리의 목표입니다. 우리는 누구나 무료로 고품질의 영어 교육 콘텐츠에 접근할 수 있어야 한다고 믿습니다.</p>
+        <p>단순히 단어를 외우는 것을 넘어, 과학적인 근거(에빙하우스 망각 곡선)와 능동적 회상 학습법을 결합하여 <strong>'잊히지 않는 학습 경험'</strong>을 제공하는 것이 목표입니다. 누구나 무료로 고품질의 영어 교육 콘텐츠에 접근할 수 있어야 한다고 믿습니다.</p>
+
+        <div class="highlight-box">
+            <h2 style="margin-top:0;">주요 서비스 특징</h2>
+            <ul class="feature-list">
+                <li>무료 사전 API 기반의 실시간 영단어 퀴즈</li>
+                <li>발음 기호 및 TTS(음성 재생) 기능 제공</li>
+                <li>오답 노트 자동 저장 및 집중 복습 모드</li>
+                <li>에빙하우스 망각 곡선 기반 학습 설계</li>
+                <li>개인 학습 데이터는 브라우저에만 저장 (서버 미전송)</li>
+            </ul>
+        </div>
 
         <h2>운영자 소개</h2>
-        <p>영어를 사랑하고 기술을 통해 복잡한 문제를 해결하고 싶어 하는 1인 개발자가 운영하고 있습니다. 실시간 사전 API를 활용하여 가장 정확한 데이터를 전달하기 위해 매일 서비스를 개선하고 있습니다.</p>
+        <p>영어 학습과 웹 기술을 사랑하는 1인 개발자가 운영하고 있습니다. 실시간 사전 API를 활용하여 가장 정확한 데이터를 전달하기 위해 꾸준히 서비스를 개선하고 있습니다. 사용자 여러분의 피드백이 서비스 발전의 가장 큰 원동력입니다.</p>
+
+        <h2>콘텐츠 업데이트 주기</h2>
+        <p>학습 단어 목록과 퀴즈 콘텐츠는 <strong>매주</strong> 업데이트됩니다. 학습법 관련 아티클은 월 1~2회 새로운 내용이 추가됩니다.</p>
 
         <div class="contact-info">
-            <h2>Contact Us</h2>
-            <p>서비스 이용 중 불편한 점이 있거나, 제휴 및 제안 사항이 있으시면 언제든 아래 이메일로 연락주세요. 평일 기준 24시간 이내에 답변드리도록 노력하겠습니다.</p>
+            <h2 style="margin-top:0;">문의하기 (Contact Us)</h2>
+            <p>서비스 이용 중 불편한 점, 오류 제보, 제휴 및 제안 사항이 있으시면 언제든 아래 이메일로 연락주세요. 평일 기준 24시간 이내에 답변드리도록 노력하겠습니다.</p>
             <p>📧 <strong>Email: upshop79@gmail.com</strong></p>
+        </div>
+
+        <div class="update-info">
+            <p>최종 업데이트: 2026년 | WordQuiz Master</p>
         </div>
 
         <br>

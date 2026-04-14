@@ -213,7 +213,9 @@ const wordDb = [
 
 let currentIdx = 0;
 let studyCount = localStorage.getItem('todayCount') ? parseInt(localStorage.getItem('todayCount')) : 0;
-const DAILY_GOAL = 20; // 하루 목표 단어 수 (원하는 대로 수정 가능)
+const DAILY_GOAL = 20; // 하루 목표 단어 수
+let currentStreak = 0; // 연속 정답 횟수
+let currentExample = ""; // 현재 단어의 예문
 
 // Wrong words persistence
 let wrongWords = localStorage.getItem('wrongWords') ? JSON.parse(localStorage.getItem('wrongWords')) : [];
@@ -243,12 +245,52 @@ function showToast(message) {
 function updateStats() {
   const countEl = document.getElementById('study-count');
   const percentEl = document.getElementById('progress-percent');
+  const progressFill = document.getElementById('progress-bar-fill');
   
   if (countEl) countEl.innerText = studyCount;
-  if (percentEl) {
-    const progress = Math.min(Math.round((studyCount / DAILY_GOAL) * 100), 100);
-    percentEl.innerText = progress;
+  
+  const progress = Math.min(Math.round((studyCount / DAILY_GOAL) * 100), 100);
+  if (percentEl) percentEl.innerText = progress;
+  if (progressFill) progressFill.style.width = `${progress}%`;
+
+  // Goal celebration check
+  if (studyCount === DAILY_GOAL && !localStorage.getItem('goalReached')) {
+    triggerGoalCelebration();
+    localStorage.setItem('goalReached', 'true');
   }
+}
+
+/**
+ * Trigger confetti celebration when daily goal is met
+ */
+function triggerGoalCelebration() {
+    confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#3b82f6', '#2ecc71', '#ffbb33', '#ef4444']
+    });
+    showToast("🎉 축하합니다! 오늘 목표를 달성했습니다!");
+}
+
+/**
+ * Update the streak UI
+ */
+function updateStreakUI(reset = false) {
+    const streakEl = document.getElementById('current-streak');
+    const streakContainer = document.getElementById('streak-container');
+    
+    if (reset) {
+        currentStreak = 0;
+    } else {
+        currentStreak++;
+        // Pulse effect
+        streakContainer.classList.remove('streak-pulse');
+        void streakContainer.offsetWidth; // trigger reflow
+        streakContainer.classList.add('streak-pulse');
+    }
+    
+    if (streakEl) streakEl.innerText = currentStreak;
 }
 
 /**
@@ -306,26 +348,43 @@ function clearWrongWords() {
  * Reset the user's study progress
  */
 function resetProgress() {
-  // 사용자에게 한 번 더 물어봅니다 (실수 방지)
   if (confirm("오늘 공부한 기록을 모두 초기화할까요?")) {
-    studyCount = 0; // 숫자를 0으로 변경
-    localStorage.setItem('todayCount', 0); // 브라우저 저장소도 0으로 변경
-    updateStats(); // 화면에 표시되는 숫자와 그래프 업데이트
+    studyCount = 0;
+    currentStreak = 0;
+    localStorage.setItem('todayCount', 0);
+    localStorage.removeItem('goalReached');
+    updateStats();
+    updateStreakUI(true);
     alert("기록이 초기화되었습니다. 다시 힘내봐요! 💪");
   }
 }
 
 /**
- * Fetch phonetics from Free Dictionary API (optional enhancement)
+ * Fetch phonetics and example from Free Dictionary API
  */
-async function fetchPhonetic(word) {
+async function fetchPhoneticAndExample(word) {
   try {
     const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-    if (!response.ok) return "";
+    if (!response.ok) return { phonetic: "", example: "" };
     const data = await response.json();
-    return data[0]?.phonetics?.[0]?.text || "";
+    
+    const phonetic = data[0]?.phonetics?.[0]?.text || "";
+    
+    // Extract first available example
+    let example = "";
+    for (const meaning of data[0].meanings) {
+        for (const definition of meaning.definitions) {
+            if (definition.example) {
+                example = definition.example;
+                break;
+            }
+        }
+        if (example) break;
+    }
+    
+    return { phonetic, example };
   } catch {
-    return "";
+    return { phonetic: "", example: "" };
   }
 }
 
@@ -338,6 +397,7 @@ async function loadQuiz() {
   const phoneticDisplay = document.getElementById('phonetic');
   const resultMsg = document.getElementById('result-msg');
   const optionsDiv = document.getElementById('options');
+  const exampleContainer = document.getElementById('example-sentence-container');
 
   // Reset UI and add animation
   targetWord.innerText = quiz.w;
@@ -348,10 +408,12 @@ async function loadQuiz() {
   phoneticDisplay.innerText = "Loading phonetics...";
   resultMsg.innerText = "";
   optionsDiv.innerHTML = "";
+  exampleContainer.style.display = 'none'; // Hide example on new load
 
-  // Async fetch phonetic for better feel
-  fetchPhonetic(quiz.w).then(phonetic => {
-    phoneticDisplay.innerText = phonetic;
+  // Async fetch data
+  fetchPhoneticAndExample(quiz.w).then(data => {
+    phoneticDisplay.innerText = data.phonetic;
+    currentExample = data.example;
   });
 
   // Shuffle options for better variety
@@ -366,6 +428,60 @@ async function loadQuiz() {
     btn.onclick = () => checkAnswer(opt, quiz.t, btn);
     optionsDiv.appendChild(btn);
   });
+}
+
+/**
+ * Reveal the example sentence
+ */
+function revealExample() {
+    const exampleContainer = document.getElementById('example-sentence-container');
+    const exampleText = document.getElementById('example-text');
+    
+    if (currentExample) {
+        exampleText.innerText = currentExample;
+        exampleContainer.style.display = 'block';
+    }
+}
+
+/**
+ * Verify user's choice
+ */
+function checkAnswer(selected, correct, selectedBtn) {
+  const allBtns = document.querySelectorAll('.opt-btn');
+  const quiz = wordDb[currentIdx];
+  
+  allBtns.forEach(btn => btn.style.pointerEvents = 'none');
+
+  if (selected === correct) {
+    selectedBtn.classList.add('correct-anim');
+    showToast("정답입니다! 정말 멋져요! 👏");
+    
+    studyCount++;
+    localStorage.setItem('todayCount', studyCount);
+    updateStats();
+    updateStreakUI();
+    revealExample(); // Show example on success
+    
+    setTimeout(() => {
+      currentIdx = (currentIdx + 1) % wordDb.length;
+      loadQuiz();
+    }, 2500); // Give time to read example
+  } else {
+    selectedBtn.classList.add('wrong-anim');
+    showToast("아쉬워요! 오답 노트에 저장할게요. ✍️");
+    updateStreakUI(true); // Reset streak
+    
+    if (!wrongWords.some(item => item.w === quiz.w)) {
+      wrongWords.push(quiz);
+      localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
+      displayWrongWords();
+    }
+
+    setTimeout(() => {
+      selectedBtn.classList.remove('wrong-anim');
+      allBtns.forEach(btn => btn.style.pointerEvents = 'auto');
+    }, 500);
+  }
 }
 
 // 오답 재시험 모드 시작!
@@ -397,6 +513,7 @@ function loadReviewQuiz() {
   const resultMsg = document.getElementById('result-msg');
   const optionsDiv = document.getElementById('options');
   const phoneticDisplay = document.getElementById('phonetic');
+  const exampleContainer = document.getElementById('example-sentence-container');
 
   // Reset UI and add animation
   targetWord.innerText = quiz.w;
@@ -406,11 +523,13 @@ function loadReviewQuiz() {
 
   resultMsg.innerText = "";
   optionsDiv.innerHTML = "";
+  exampleContainer.style.display = 'none'; // Hide example on new load
   
   if (phoneticDisplay) {
     phoneticDisplay.innerText = "Loading phonetics...";
-    fetchPhonetic(quiz.w).then(phonetic => {
-      phoneticDisplay.innerText = phonetic;
+    fetchPhoneticAndExample(quiz.w).then(data => {
+      phoneticDisplay.innerText = data.phonetic;
+      currentExample = data.example;
     });
   }
   
@@ -425,52 +544,6 @@ function loadReviewQuiz() {
   });
 }
 
-/**
- * Verify user's choice
- */
-function checkAnswer(selected, correct, selectedBtn) {
-  const allBtns = document.querySelectorAll('.opt-btn');
-  const quiz = wordDb[currentIdx];
-  
-  // 모든 버튼을 가져와서 클릭을 잠시 막습니다 (중복 클릭 방지)
-  allBtns.forEach(btn => btn.style.pointerEvents = 'none');
-
-  if (selected === correct) {
-    // Correct UI
-    selectedBtn.classList.add('correct-anim');
-    showToast("정답입니다! 정말 멋져요! 👏");
-    
-    studyCount++;
-    localStorage.setItem('todayCount', studyCount); // 브라우저에 저장
-    updateStats(); // 화면 업데이트
-    
-    // Auto load next quiz after slightly shorter delay
-    setTimeout(() => {
-      currentIdx = (currentIdx + 1) % wordDb.length;
-      loadQuiz();
-      // Pointer events will be reset by loadQuiz because optionsDiv is cleared
-    }, 1000);
-  } else {
-    // Incorrect UI
-    selectedBtn.classList.add('wrong-anim');
-    showToast("아쉬워요! 오답 노트에 저장할게요. ✍️");
-    
-    // --- 오답 노트 저장 로직 추가 ---
-    // 이미 저장된 단어인지 확인 후 없으면 추가
-    if (!wrongWords.some(item => item.w === quiz.w)) {
-      wrongWords.push(quiz); // 전체 데이터 저장
-      localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
-      displayWrongWords(); // 화면 업데이트
-    }
-
-    // 오답 효과 후 다시 클릭 가능하게 복구
-    setTimeout(() => {
-      selectedBtn.classList.remove('wrong-anim');
-      allBtns.forEach(btn => btn.style.pointerEvents = 'auto');
-    }, 500);
-  }
-}
-
 // 오답 모드 정답 체크
 function checkReviewAnswer(selected, correct, selectedBtn) {
   const allBtns = document.querySelectorAll('.opt-btn');
@@ -481,6 +554,7 @@ function checkReviewAnswer(selected, correct, selectedBtn) {
   if(selected === correct) {
       selectedBtn.classList.add('correct-anim');
       showToast("오답 정복 완료! 🎉");
+      revealExample(); // Show example on success
       
       setTimeout(() => {
           // 정복한 단어는 오답 노트에서 삭제
@@ -494,7 +568,7 @@ function checkReviewAnswer(selected, correct, selectedBtn) {
               alert("모든 오답을 마스터했습니다! 대단해요! 🏆");
               location.reload(); // 원래 모드로 복귀 (새로고침)
           }
-      }, 1000);
+      }, 2500); // Give time to read example
   } else {
       selectedBtn.classList.add('wrong-anim');
       showToast("조금 더 공부가 필요해요! 💪");

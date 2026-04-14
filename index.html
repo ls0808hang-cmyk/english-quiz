@@ -15,22 +15,23 @@
     
     <link rel="stylesheet" href="style.css">
     <script defer src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
 <div id="toast">메시지가 여기에 표시됩니다.</div>
 
 <div class="container">
-    <!-- SEO Hidden Content -->
-    <div style="display: none;">
-        <h2>매일 업데이트되는 영단어 퀴즈와 과학적 암기 전략</h2>
-        <p>WordQuiz Master는 무료 사전 API를 활용하여 Resilience, Accomplish 등 필수 영단어를 퀴즈 형식으로 제공합니다. 에빙하우스 망각 곡선을 기반으로 한 능동적 회상 학습법을 통해 영단어를 장기 기억으로 전환하세요.</p>
-    </div>
-
     <!-- Stats Header -->
     <div class="stats-header">
         <div class="stats-item">오늘 공부한 단어: <strong id="study-count">0</strong>개 (<span id="progress-percent">0</span>%)</div>
+        <div class="streak-item" id="streak-container">🔥 연속 정답: <strong id="current-streak">0</strong></div>
         <button onclick="resetProgress()" class="reset-link">기록 초기화</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
     </div>
 
     <!-- Quiz Card -->
@@ -48,6 +49,12 @@
             <!-- Options will be dynamically inserted here -->
         </div>
         <div class="feedback-msg" id="result-msg"></div>
+
+        <!-- Example Sentence -->
+        <div id="example-sentence-container" class="example-box" style="display: none;">
+            <p class="example-label">💡 문장 속에서 익히기</p>
+            <p id="example-text" class="example-text"></p>
+        </div>
     </main>
 
     <!-- Review Card -->
