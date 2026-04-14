@@ -7,7 +7,7 @@ A web-based multiple-choice English vocabulary quiz. Designed to help users impr
 - **Core Files:** `index.html`, `style.css`, `main.js`.
 - **Functionality:**
     - Multiple-choice quiz format (4 options).
-    - Local `wordDb` containing words and translations.
+    - Local `wordDb` containing 200 high-frequency English words.
     - Asynchronous phonetic fetching from `api.dictionaryapi.dev`.
     - Modern design with grid layout and interactive feedback (color changes, animations).
     - Educational content section for "AdSense optimization" and learning tips.
@@ -15,7 +15,10 @@ A web-based multiple-choice English vocabulary quiz. Designed to help users impr
     - Google Site Verification: Active.
     - Naver Site Verification: Active.
     - Meta tags for description, keywords, and Open Graph.
-- **Design:** Modern "card-based" UI, clean spacing, primary color: `#3498db`.
+- **Design:** 
+    - Modern "card-based" UI, clean spacing, primary color: `#3b82f6`.
+    - Improved Button Design: Large, high-visibility option buttons with clear correct/wrong states.
+    - Responsive layout for mobile and desktop.
 
 ## Plan & Steps for Current Requested Change
 1.  **Switch to Multiple Choice:** [COMPLETED]
@@ -25,6 +28,7 @@ A web-based multiple-choice English vocabulary quiz. Designed to help users impr
     - Implemented a card-based design with subtle shadows and grid layout.
     - Added button hover effects and "shake" animation for incorrect answers.
     - Integrated automatic phonetic fetching for a dynamic feel.
+    - **Refined Button Styles:** Enlarged buttons, increased font weight, and added distinct colors for feedback.
 3.  **Future Enhancements:**
     - Scoring system (streak counts).
     - Randomize option order for better replayability.

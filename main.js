@@ -340,7 +340,7 @@ async function loadQuiz() {
   // Create option buttons
   shuffledOptions.forEach(opt => {
     const btn = document.createElement('button');
-    btn.className = 'option-btn';
+    btn.className = 'opt-btn';
     btn.innerText = opt;
     btn.setAttribute('aria-label', `선택지: ${opt}`);
     btn.onclick = () => checkAnswer(opt, quiz.t, btn);
@@ -367,7 +367,7 @@ function loadReviewQuiz() {
   const quiz = wrongWords[reviewIdx];
   
   // 퀴즈 헤더 제목 변경 (현재 모드 표시)
-  const headerTitle = document.querySelector('.quiz-header h1');
+  const headerTitle = document.getElementById('quiz-header-text');
   if (headerTitle) {
       headerTitle.innerText = "📕 오답 복습 모드";
       headerTitle.style.color = "#e53e3e";
@@ -393,9 +393,9 @@ function loadReviewQuiz() {
   
   shuffledOptions.forEach(opt => {
       const btn = document.createElement('button');
-      btn.className = 'option-btn';
+      btn.className = 'opt-btn';
       btn.innerText = opt;
-      btn.onclick = () => checkReviewAnswer(opt, quiz.t);
+      btn.onclick = () => checkReviewAnswer(opt, quiz.t, btn);
       optionsDiv.appendChild(btn);
   });
 }
@@ -405,7 +405,7 @@ function loadReviewQuiz() {
  */
 function checkAnswer(selected, correct, selectedBtn) {
   const msg = document.getElementById('result-msg');
-  const allBtns = document.querySelectorAll('.option-btn');
+  const allBtns = document.querySelectorAll('.opt-btn');
   const quiz = wordDb[currentIdx];
   
   if (selected === correct) {
@@ -420,9 +420,7 @@ function checkAnswer(selected, correct, selectedBtn) {
     // Highlight correct button
     allBtns.forEach(btn => {
       if (btn.innerText === correct) {
-        btn.style.backgroundColor = "#2ecc71";
-        btn.style.color = "white";
-        btn.style.borderColor = "#2ecc71";
+        btn.classList.add('correct');
       }
       btn.disabled = true; // Disable all to prevent double-clicks
     });
@@ -436,8 +434,7 @@ function checkAnswer(selected, correct, selectedBtn) {
     // Incorrect UI
     msg.innerText = "아쉬워요! 다시 한 번 생각해보세요. 🤔";
     msg.style.color = "#e74c3c";
-    selectedBtn.style.backgroundColor = "#fdf2f2";
-    selectedBtn.style.borderColor = "#e74c3c";
+    selectedBtn.classList.add('wrong');
     
     // --- 오답 노트 저장 로직 추가 ---
     // 이미 저장된 단어인지 확인 후 없으면 추가
@@ -459,23 +456,40 @@ function checkAnswer(selected, correct, selectedBtn) {
 }
 
 // 오답 모드 정답 체크
-function checkReviewAnswer(selected, correct) {
+function checkReviewAnswer(selected, correct, selectedBtn) {
+  const allBtns = document.querySelectorAll('.opt-btn');
+  
   if(selected === correct) {
-      alert("오답 정복 완료! 🎉");
+      selectedBtn.classList.add('correct');
+      allBtns.forEach(btn => btn.disabled = true);
       
-      // 정복한 단어는 오답 노트에서 삭제
-      wrongWords.splice(reviewIdx, 1);
-      localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
-      displayWrongWords();
+      setTimeout(() => {
+          alert("오답 정복 완료! 🎉");
+          
+          // 정복한 단어는 오답 노트에서 삭제
+          wrongWords.splice(reviewIdx, 1);
+          localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
+          displayWrongWords();
 
-      if (wrongWords.length > 0) {
-          loadReviewQuiz(); // 다음 오답으로
-      } else {
-          alert("모든 오답을 마스터했습니다! 대단해요! 🏆");
-          location.reload(); // 원래 모드로 복귀 (새로고침)
-      }
+          if (wrongWords.length > 0) {
+              loadReviewQuiz(); // 다음 오답으로
+          } else {
+              alert("모든 오답을 마스터했습니다! 대단해요! 🏆");
+              location.reload(); // 원래 모드로 복귀 (새로고침)
+          }
+      }, 500);
   } else {
-      alert("아직 조금 더 공부가 필요해요! 다시 도전해보세요.");
+      selectedBtn.classList.add('wrong');
+      selectedBtn.animate([
+        { transform: 'translateX(0)' },
+        { transform: 'translateX(-5px)' },
+        { transform: 'translateX(5px)' },
+        { transform: 'translateX(0)' }
+      ], { duration: 200, iterations: 2 });
+      setTimeout(() => {
+          alert("아직 조금 더 공부가 필요해요! 다시 도전해보세요.");
+          selectedBtn.classList.remove('wrong');
+      }, 500);
   }
 }
 
