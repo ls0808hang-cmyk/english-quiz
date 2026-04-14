@@ -222,6 +222,22 @@ let isReviewMode = false; // 현재 재시험 모드인지 확인하는 변수
 let reviewIdx = 0;
 
 /**
+ * Show a temporary toast message to the user
+ */
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  
+  toast.innerText = message;
+  toast.style.display = 'block';
+  
+  // Trigger animation if defined in CSS, otherwise just show/hide
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 2500);
+}
+
+/**
  * Update the study stats displayed to the user
  */
 function updateStats() {
@@ -413,41 +429,31 @@ function loadReviewQuiz() {
  * Verify user's choice
  */
 function checkAnswer(selected, correct, selectedBtn) {
-  const msg = document.getElementById('result-msg');
   const allBtns = document.querySelectorAll('.opt-btn');
   const quiz = wordDb[currentIdx];
   
+  // 모든 버튼을 가져와서 클릭을 잠시 막습니다 (중복 클릭 방지)
+  allBtns.forEach(btn => btn.style.pointerEvents = 'none');
+
   if (selected === correct) {
     // Correct UI
+    selectedBtn.classList.add('correct-anim');
+    showToast("정답입니다! 정말 멋져요! 👏");
+    
     studyCount++;
     localStorage.setItem('todayCount', studyCount); // 브라우저에 저장
     updateStats(); // 화면 업데이트
     
-    msg.innerText = "정답입니다! 훌륭해요! 🎉";
-    msg.style.color = "#2ecc71";
-    
-    // Highlight correct button with animation
-    allBtns.forEach(btn => {
-      if (btn.innerText === correct) {
-        btn.classList.add('correct-anim');
-      }
-      btn.disabled = true; // Disable all to prevent double-clicks
-    });
-
     // Auto load next quiz after slightly shorter delay
     setTimeout(() => {
       currentIdx = (currentIdx + 1) % wordDb.length;
       loadQuiz();
-    }, 1200);
+      // Pointer events will be reset by loadQuiz because optionsDiv is cleared
+    }, 1000);
   } else {
     // Incorrect UI
-    msg.innerText = "아쉬워요! 다시 한 번 생각해보세요. 🤔";
-    msg.style.color = "#e74c3c";
-    
-    // Trigger shake animation
-    selectedBtn.classList.remove('wrong-anim');
-    void selectedBtn.offsetWidth; // Trigger reflow
     selectedBtn.classList.add('wrong-anim');
+    showToast("아쉬워요! 오답 노트에 저장할게요. ✍️");
     
     // --- 오답 노트 저장 로직 추가 ---
     // 이미 저장된 단어인지 확인 후 없으면 추가
@@ -456,6 +462,12 @@ function checkAnswer(selected, correct, selectedBtn) {
       localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
       displayWrongWords(); // 화면 업데이트
     }
+
+    // 오답 효과 후 다시 클릭 가능하게 복구
+    setTimeout(() => {
+      selectedBtn.classList.remove('wrong-anim');
+      allBtns.forEach(btn => btn.style.pointerEvents = 'auto');
+    }, 500);
   }
 }
 
@@ -463,13 +475,14 @@ function checkAnswer(selected, correct, selectedBtn) {
 function checkReviewAnswer(selected, correct, selectedBtn) {
   const allBtns = document.querySelectorAll('.opt-btn');
   
+  // 모든 버튼 클릭 잠시 막기
+  allBtns.forEach(btn => btn.style.pointerEvents = 'none');
+
   if(selected === correct) {
       selectedBtn.classList.add('correct-anim');
-      allBtns.forEach(btn => btn.disabled = true);
+      showToast("오답 정복 완료! 🎉");
       
       setTimeout(() => {
-          alert("오답 정복 완료! 🎉");
-          
           // 정복한 단어는 오답 노트에서 삭제
           wrongWords.splice(reviewIdx, 1);
           localStorage.setItem('wrongWords', JSON.stringify(wrongWords));
@@ -481,15 +494,14 @@ function checkReviewAnswer(selected, correct, selectedBtn) {
               alert("모든 오답을 마스터했습니다! 대단해요! 🏆");
               location.reload(); // 원래 모드로 복귀 (새로고침)
           }
-      }, 600);
+      }, 1000);
   } else {
-      selectedBtn.classList.remove('wrong-anim');
-      void selectedBtn.offsetWidth; // Trigger reflow
       selectedBtn.classList.add('wrong-anim');
+      showToast("조금 더 공부가 필요해요! 💪");
       
       setTimeout(() => {
-          alert("아직 조금 더 공부가 필요해요! 다시 도전해보세요.");
           selectedBtn.classList.remove('wrong-anim');
+          allBtns.forEach(btn => btn.style.pointerEvents = 'auto');
       }, 500);
   }
 }
