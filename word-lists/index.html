@@ -1,85 +1,79 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주제별 단어 모음 | English Quiz Hub</title>
-    <meta name="description" content="일상, 여행, 비즈니스 등 상황별로 꼭 필요한 영단어들을 모아 정리했습니다.">
-    <link rel="stylesheet" href="../assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>영어 단어 모음 | English Quiz Hub</title>
+  <meta name="description" content="일상 회화, 여행 영어 등 주제별 영어 단어 모음을 정리한 페이지입니다." />
+  <style>
+    :root{--bg:#f7f8fb;--card:#fff;--text:#1f2937;--sub:#6b7280;--line:#e5e7eb;--primary:#2563eb;--soft:#eff6ff;}
+    *{box-sizing:border-box;} body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;}
+    a{text-decoration:none;color:var(--primary);} .container{width:min(1040px,92%);margin:0 auto;}
+    header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;flex-wrap:wrap;}
+    .logo{font-weight:700;font-size:20px;color:var(--text);} .menu{display:flex;gap:14px;flex-wrap:wrap;} .menu a{color:var(--sub);font-size:14px;}
+    .hero{padding:52px 0 24px;} .hero-box{background:linear-gradient(135deg,#eff6ff,#fff);border:1px solid #dbeafe;border-radius:22px;padding:32px;}
+    .hero h1{margin:0 0 14px;font-size:36px;} .hero p{margin:0;color:var(--sub);}
+    .grid{padding:10px 0 60px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+    .card{display:block;background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;}
+    .card h2{margin:0 0 10px;font-size:24px;color:var(--text);} .card p{margin:0 0 12px;color:var(--sub);}
+    .badge{display:inline-block;background:var(--soft);border:1px solid #bfdbfe;color:#1d4ed8;font-size:12px;font-weight:700;border-radius:999px;padding:6px 10px;margin-bottom:10px;}
+    footer{border-top:1px solid var(--line);background:#fff;padding:24px 0 40px;color:var(--sub);font-size:14px;} .footer-links{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+    @media (max-width:760px){.grid{grid-template-columns:1fr}.hero h1{font-size:29px}}
+  </style>
 </head>
 <body>
-
 <header>
-    <div class="container nav">
-        <a href="../index.html" class="logo">English Quiz Hub</a>
-        <nav class="menu">
-            <a href="../index.html">홈</a>
-            <a href="../guides/index.html">학습 가이드</a>
-            <a href="../guides/beginner-english-words.html">초급 영단어</a>
-            <a href="../guides/memorization-method.html">단어 암기법</a>
-            <a href="../contact.html">문의하기</a>
-            <a href="../about.html">사이트 소개</a>
-            <a href="../faq.html">FAQ</a>
-        </nav>
-    </div>
+  <div class="container nav">
+    <a href="/index.html" class="logo">English Quiz Hub</a>
+    <nav class="menu">
+      <a href="/index.html">홈</a>
+      <a href="/guides/index.html">학습 가이드</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/contact.html">문의하기</a>
+    </nav>
+  </div>
 </header>
 
-<main class="container" style="padding-top: 40px; padding-bottom: 60px;">
-    <section class="section-head" style="text-align: left;">
-        <h1>📚 주제별 단어 모음</h1>
-        <p>실제 사용 상황에 맞춰 엄선된 필수 단어 리스트입니다. 퀴즈와 병행하여 학습 효과를 높여보세요.</p>
-    </section>
-
-    <div class="guide-grid" style="margin-top: 30px;">
-        <a href="daily-conversation-50.html" class="section-card">
-            <span class="badge">일상 생활</span>
-            <h3>☕ 일상 필수 50단어</h3>
-            <p>인사, 감정 표현, 하루 일과 등 매일 사용하는 기본 어휘들을 정리했습니다.</p>
-            <span class="link-text">리스트 보기 →</span>
-        </a>
-
-        <a href="travel-english-50.html" class="section-card">
-            <span class="badge">해외 여행</span>
-            <h3>✈️ 여행 필수 50단어</h3>
-            <p>공항, 입국 심사, 호텔, 교통수단 이용 시 꼭 알아야 할 표현들입니다.</p>
-            <span class="link-text">리스트 보기 →</span>
-        </a>
-
-        <a href="office-english-50.html" class="section-card">
-            <span class="badge">비즈니스</span>
-            <h3>💻 비즈니스 필수 50단어</h3>
-            <p>이메일, 회의, 협상 등 업무 환경에서 자주 쓰이는 전문적인 어휘들입니다.</p>
-            <span class="link-text">리스트 보기 →</span>
-        </a>
-
-        <a href="shopping-english-50.html" class="section-card">
-            <span class="badge">쇼핑</span>
-            <h3>🛒 쇼핑 필수 50단어</h3>
-            <p>물건 찾기, 가격 흥정, 결제 및 환불 시 유용한 실전 쇼핑 용어입니다.</p>
-            <span class="link-text">리스트 보기 →</span>
-        </a>
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-box">
+        <h1>주제별 영어 단어 모음</h1>
+        <p>일상 회화와 여행처럼 자주 만나는 장면을 기준으로 영어 단어를 정리했습니다. 퀴즈와 함께 읽으면 복습 효과가 더 좋아집니다.</p>
+      </div>
     </div>
+  </section>
 
-    <div style="margin-top: 40px; text-align: center;">
-        <a href="../index.html" class="btn btn-primary">← 홈으로 돌아가기</a>
-    </div>
+  <section class="container grid">
+    <a href="/word-lists/daily-conversation-50.html" class="card">
+      <span class="badge">일상 회화</span>
+      <h2>일상 회화 필수 단어 50</h2>
+      <p>기본 대화, 감정 표현, 시간, 이동, 음식 등 생활에서 자주 쓰는 영어 단어 50개를 모았습니다.</p>
+      <p>초급 학습자가 먼저 보기 좋은 목록입니다.</p>
+    </a>
+
+    <a href="/word-lists/travel-english-50.html" class="card">
+      <span class="badge">여행 영어</span>
+      <h2>여행 영어 필수 단어 50</h2>
+      <p>공항, 호텔, 식당, 쇼핑 상황에 자주 나오는 영어 단어 50개를 정리했습니다.</p>
+      <p>여행 준비용으로 보기 좋습니다.</p>
+    </a>
+  </section>
 </main>
 
 <footer>
-    <div class="container">
-        <div class="footer-links">
-            <a href="../index.html">홈</a>
-            <a href="../guides/index.html">학습 가이드</a>
-            <a href="../about.html">사이트 소개</a>
-            <a href="../privacy.html">개인정보처리방침</a>
-            <a href="../terms.html">이용약관</a>
-            <a href="../contact.html">문의하기</a>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 English Quiz Hub. 영어 단어 퀴즈와 복습 중심의 학습 사이트.</p>
-        </div>
+  <div class="container">
+    <div class="footer-links">
+      <a href="/index.html">홈</a>
+      <a href="/guides/index.html">학습 가이드</a>
+      <a href="/about.html">사이트 소개</a>
+      <a href="/privacy.html">개인정보처리방침</a>
+      <a href="/terms.html">이용약관</a>
+      <a href="/contact.html">문의하기</a>
     </div>
+    <div>© 2026 English Quiz Hub. 주제별 영어 단어 모음.</div>
+  </div>
 </footer>
-
 </body>
 </html>
