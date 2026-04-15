@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://english-quiz-jz1.pages.dev/sitemap.xml
