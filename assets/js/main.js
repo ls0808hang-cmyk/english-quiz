@@ -304,7 +304,7 @@ function displayWrongWords() {
   listDiv.innerHTML = ""; // 기존 내용 비우기
 
   if (wrongWords.length === 0) {
-    listDiv.innerHTML = "<p style='color: #a0aec0;'>틀린 단어가 없습니다. 완벽해요! 👍</p>";
+    listDiv.innerHTML = '<p class="empty-note-text">아직 저장된 오답이 없습니다. 퀴즈를 먼저 풀고 틀린 단어를 오답노트에 저장해 보세요.</p>';
     if (retryBtn) retryBtn.style.display = "none"; // 오답 없으면 버튼 숨김
     return;
   }
@@ -405,14 +405,14 @@ async function loadQuiz() {
   void targetWord.offsetWidth; // Trigger reflow
   targetWord.classList.add('new-word-anim');
 
-  phoneticDisplay.innerText = "Loading phonetics...";
-  resultMsg.innerText = "";
+  phoneticDisplay.innerText = "/발음 기호 불러오는 중.../";
+  resultMsg.innerHTML = '<p class="quiz-help-text">문제를 풀고 정답을 확인한 뒤, 헷갈린 단어는 오답노트에 저장해 반복 복습해 보세요.</p>';
   optionsDiv.innerHTML = "";
   exampleContainer.style.display = 'none'; // Hide example on new load
 
   // Async fetch data
   fetchPhoneticAndExample(quiz.w).then(data => {
-    phoneticDisplay.innerText = data.phonetic;
+    phoneticDisplay.innerText = data.phonetic || "/기호 정보 없음/";
     currentExample = data.example;
   });
 
@@ -521,14 +521,14 @@ function loadReviewQuiz() {
   void targetWord.offsetWidth; // Trigger reflow
   targetWord.classList.add('new-word-anim');
 
-  resultMsg.innerText = "";
+  resultMsg.innerHTML = '<p class="quiz-help-text">문제를 풀고 정답을 확인한 뒤, 헷갈린 단어는 오답노트에 저장해 반복 복습해 보세요.</p>';
   optionsDiv.innerHTML = "";
   exampleContainer.style.display = 'none'; // Hide example on new load
   
   if (phoneticDisplay) {
-    phoneticDisplay.innerText = "Loading phonetics...";
+    phoneticDisplay.innerText = "/발음 기호 불러오는 중.../";
     fetchPhoneticAndExample(quiz.w).then(data => {
-      phoneticDisplay.innerText = data.phonetic;
+      phoneticDisplay.innerText = data.phonetic || "/기호 정보 없음/";
       currentExample = data.example;
     });
   }
@@ -585,7 +585,7 @@ function checkReviewAnswer(selected, correct, selectedBtn) {
  */
 function speakWord() {
   const word = document.getElementById('target-word').innerText;
-  if (word && word !== "Loading...") {
+  if (word && !word.includes("불러오는 중")) {
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-US'; // 미국식 영어 발음
     utterance.rate = 0.8;    // 속도를 약간 느리게 (학습용)

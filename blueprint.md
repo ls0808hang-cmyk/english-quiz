@@ -11,6 +11,8 @@ A web-based multiple-choice English vocabulary quiz. Designed to help users impr
     - Asynchronous phonetic fetching from `api.dictionaryapi.dev`.
     - Modern design with grid layout and interactive feedback (color changes, animations).
     - Educational content section for "AdSense optimization" and learning tips.
+    - **Daily Progress & Streak:** Progress bar and consecutive correct answer tracking.
+    - **Review Mode:** "Wrong Answer Notebook" functionality using LocalStorage to re-test missed words.
 - **SEO & Analytics:**
     - Google Site Verification: Active.
     - Naver Site Verification: Active.
@@ -19,6 +21,7 @@ A web-based multiple-choice English vocabulary quiz. Designed to help users impr
     - Modern "card-based" UI, clean spacing, primary color: `#3b82f6`.
     - Improved Button Design: Large, high-visibility option buttons with clear correct/wrong states.
     - Responsive layout for mobile and desktop.
+    - **UX Improvements:** Defined utility classes for loading, status, and placeholder messages to ensure consistent, friendly communication.
 
 ## Plan & Steps for Current Requested Change
 1.  **Switch to Multiple Choice:** [COMPLETED]
@@ -29,6 +32,10 @@ A web-based multiple-choice English vocabulary quiz. Designed to help users impr
     - Added button hover effects and "shake" animation for incorrect answers.
     - Integrated automatic phonetic fetching for a dynamic feel.
     - **Refined Button Styles:** Enlarged buttons, increased font weight, and added distinct colors for feedback.
+3.  **UX Messaging Enhancements:** [COMPLETED]
+    - Standardized placeholder text for "Loading", "Status", "Empty Notebook", and "Quiz Help".
+    - Added CSS utility classes (`loading-text`, `status-text`, `empty-note-text`, `quiz-help-text`, `result-placeholder`) for consistent styling.
+    - Updated `index.html` and `main.js` to use these new styles and friendly messaging.
 3.  **Future Enhancements:**
     - Scoring system (streak counts).
     - Randomize option order for better replayability.

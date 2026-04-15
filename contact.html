@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>문의하기 | English Quiz Hub</title>
+  <meta name="description" content="English Quiz Hub 문의 페이지입니다. 사이트 오류, 오탈자 제보, 개선 제안, 제휴 문의를 이메일로 보낼 수 있습니다." />
+  <style>
+    :root{
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --sub:#6b7280;
+      --line:#e5e7eb;
+      --primary:#2563eb;
+      --primary-dark:#1d4ed8;
+      --soft:#eff6ff;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+    a{text-decoration:none;color:var(--primary);}
+    .container{
+      width:min(1100px, 92%);
+      margin:0 auto;
+    }
+    header{
+      background:#fff;
+      border-bottom:1px solid var(--line);
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:16px 0;
+    }
+    .logo{
+      font-weight:700;
+      font-size:20px;
+      color:var(--text);
+    }
+    .menu{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .menu a{
+      color:var(--sub);
+      font-size:14px;
+    }
+    .menu a:hover{color:var(--primary);}
+    .hero{
+      padding:56px 0 28px;
+    }
+    .hero-box{
+      background:linear-gradient(135deg, #eff6ff, #ffffff);
+      border:1px solid #dbeafe;
+      border-radius:20px;
+      padding:32px;
+    }
+    .hero h1{
+      margin:0 0 14px;
+      font-size:36px;
+      line-height:1.25;
+    }
+    .hero p{
+      margin:0;
+      color:var(--sub);
+      font-size:17px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:24px;
+      padding:20px 0 60px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 8px 24px rgba(15,23,42,0.04);
+    }
+    h2{
+      margin:0 0 14px;
+      font-size:24px;
+    }
+    h3{
+      margin:22px 0 10px;
+      font-size:18px;
+    }
+    p{margin:0 0 14px;}
+    ul{
+      margin:0;
+      padding-left:20px;
+    }
+    li{margin-bottom:8px;}
+    .email-box{
+      background:var(--soft);
+      border:1px solid #bfdbfe;
+      border-radius:14px;
+      padding:18px;
+      margin:18px 0;
+      font-size:17px;
+      font-weight:700;
+    }
+    .btn{
+      display:inline-block;
+      background:var(--primary);
+      color:#fff;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:700;
+    }
+    .btn:hover{background:var(--primary-dark);}
+    .small{
+      color:var(--sub);
+      font-size:14px;
+    }
+    .info-list{
+      display:grid;
+      gap:14px;
+      margin-top:14px;
+    }
+    .info-item{
+      background:#fafafa;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:16px;
+    }
+    footer{
+      border-top:1px solid var(--line);
+      background:#fff;
+      padding:24px 0 40px;
+      color:var(--sub);
+      font-size:14px;
+    }
+    .footer-links{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr;}
+      .hero h1{font-size:28px;}
+      .hero-box{padding:24px;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="/index.html" class="logo">English Quiz Hub</a>
+      <nav class="menu">
+        <a href="/index.html">홈</a>
+        <a href="/guides/index.html">학습 가이드</a>
+        <a href="/about.html">사이트 소개</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/privacy.html">개인정보처리방침</a>
+        <a href="/terms.html">이용약관</a>
+        <a href="/contact.html">문의하기</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-box">
+          <h1>문의하기</h1>
+          <p>
+            사이트 이용 중 불편한 점, 오탈자, 퀴즈 오류, 개선 제안이 있다면 아래 이메일로 보내주세요.
+            운영에 필요한 내용 위주로 확인하고 있으며, 학습 품질을 높이는 데 참고하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container grid">
+      <article class="card">
+        <h2>연락 방법</h2>
+        <p>
+          가장 빠른 문의 방법은 이메일입니다. 아래 주소로 문의 내용을 보내주시면 확인 후 가능한 범위에서 검토합니다.
+        </p>
+
+        <div class="email-box">upshop79@gmail.com</div>
+
+        <p>
+          메일 제목에 문의 유형을 함께 적어주시면 확인에 도움이 됩니다.
+        </p>
+
+        <ul>
+          <li>[오류 제보] 특정 퀴즈가 정상적으로 작동하지 않을 때</li>
+          <li>[오탈자 제보] 단어, 보기, 설명 문장에 수정이 필요할 때</li>
+          <li>[개선 제안] 새로운 학습 가이드나 주제별 단어 모음을 제안할 때</li>
+          <li>[기타 문의] 사이트 운영과 관련된 일반 문의</li>
+        </ul>
+
+        <h3>문의 메일 예시</h3>
+        <div class="info-item">
+          <strong>제목:</strong> [오류 제보] 오답노트 저장 버튼이 작동하지 않습니다<br />
+          <strong>내용:</strong> 모바일 크롬에서 퀴즈를 푼 뒤 저장 버튼을 눌렀는데 오답노트에 반영되지 않았습니다. 사용한 기기는 안드로이드입니다.
+        </div>
+
+        <h3>문의 시 함께 적어주면 좋은 내용</h3>
+        <ul>
+          <li>문제가 발생한 페이지 주소</li>
+          <li>사용 중인 기기 종류와 브라우저</li>
+          <li>어떤 버튼을 눌렀는지 또는 어떤 상황에서 문제가 생겼는지</li>
+          <li>오탈자 또는 설명 오류가 있다면 해당 단어와 문장</li>
+        </ul>
+
+        <p class="small">
+          학습 콘텐츠 품질과 사이트 안정성을 높이기 위한 문의를 우선적으로 확인합니다.
+        </p>
+      </article>
+
+      <aside class="card">
+        <h2>이런 문의를 받을 수 있습니다</h2>
+
+        <div class="info-list">
+          <div class="info-item">
+            <strong>퀴즈 오류 제보</strong>
+            <p>정답 판정이 이상하거나 버튼이 작동하지 않는 문제를 알려주세요.</p>
+          </div>
+
+          <div class="info-item">
+            <strong>오탈자 및 어색한 표현</strong>
+            <p>단어 뜻, 예문, 보기 문구에서 수정이 필요한 부분을 보내주세요.</p>
+          </div>
+
+          <div class="info-item">
+            <strong>학습 콘텐츠 제안</strong>
+            <p>여행 영어, 비즈니스 영어, 초급 회화 등 추가되면 좋은 주제를 제안해 주세요.</p>
+          </div>
+
+          <div class="info-item">
+            <strong>모바일 화면 문제</strong>
+            <p>버튼이 잘리거나 글자가 겹치는 등 사용성 문제도 제보할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <h3>관련 페이지 바로가기</h3>
+        <ul>
+          <li><a href="/guides/index.html">학습 가이드 모음</a></li>
+          <li><a href="/about.html">사이트 소개</a></li>
+          <li><a href="/faq.html">자주 묻는 질문</a></li>
+          <li><a href="/privacy.html">개인정보처리방침</a></li>
+        </ul>
+
+        <p style="margin-top:18px;">
+          <a class="btn" href="mailto:upshop79@gmail.com">이메일 보내기</a>
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="/index.html">홈</a>
+        <a href="/guides/index.html">학습 가이드</a>
+        <a href="/about.html">사이트 소개</a>
+        <a href="/privacy.html">개인정보처리방침</a>
+        <a href="/terms.html">이용약관</a>
+        <a href="/contact.html">문의하기</a>
+      </div>
+      <div>© 2026 English Quiz Hub. 영어 퀴즈와 복습 중심의 학습 사이트.</div>
+    </div>
+  </footer>
+</body>
+</html>
