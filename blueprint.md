@@ -16,6 +16,8 @@ A comprehensive web-based platform for English vocabulary learning. It features 
     - **UX/UI:** Modern, card-based responsive design using CSS variables and Pretendard font. Sticky navigation and unified branding.
 - **SEO & Connectivity:**
     - Integrated Google and Naver site verifications.
+    - `ads.txt` implemented for AdSense authorization.
+    - `google-adsense-account` meta tag added for account ownership verification.
     - Open Graph tags and canonical URLs for better social sharing and search ranking.
 
 ## Implementation History
@@ -29,6 +31,10 @@ A comprehensive web-based platform for English vocabulary learning. It features 
 4.  **UX & Feedback Tuning:** [COMPLETED]
     - Added toast notifications, progress animations, and immediate feedback for correct/wrong answers.
     - Standardized messaging for loading and empty states.
+5.  **AdSense Setup:** [COMPLETED]
+    - Integrated AdSense script across all HTML files.
+    - Added authorized `ads.txt` file in the root.
+    - Added `<meta name="google-adsense-account">` tag for account verification.
 
 ## Future Roadmap
 - **Social Integration:** Allow users to share their daily progress or streaks.
