@@ -1,77 +1,142 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오답노트 활용법 | English Quiz Hub</title>
-    <meta name="description" content="틀린 단어를 다시 틀리지 않게 만들어주는 효과적인 오답노트 활용 전략을 소개합니다.">
-    <link rel="stylesheet" href="../assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오답노트 활용 가이드 | English Quiz Hub</title>
+  <meta name="description" content="영어 단어 퀴즈에서 틀린 문제를 오답노트로 정리하고 반복 복습하는 방법을 설명하는 가이드입니다." />
+  <style>
+    :root{--bg:#f7f8fb;--card:#fff;--text:#1f2937;--sub:#6b7280;--line:#e5e7eb;--primary:#2563eb;--soft:#eff6ff;}
+    *{box-sizing:border-box;} body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;}
+    a{text-decoration:none;color:var(--primary);} .container{width:min(920px,92%);margin:0 auto;}
+    header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;flex-wrap:wrap;}
+    .logo{font-weight:700;font-size:20px;color:var(--text);} .menu{display:flex;gap:14px;flex-wrap:wrap;}
+    .menu a{color:var(--sub);font-size:14px;} .menu a:hover{color:var(--primary);}
+    .hero{padding:52px 0 24px;} .hero-box{background:linear-gradient(135deg,#eff6ff,#fff);border:1px solid #dbeafe;border-radius:22px;padding:32px;}
+    .hero h1{margin:0 0 14px;font-size:36px;line-height:1.25;} .hero p{margin:0;color:var(--sub);}
+    article{padding:10px 0 60px;} .section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;margin-bottom:20px;}
+    h2{margin:0 0 12px;font-size:26px;} h3{margin:20px 0 10px;font-size:19px;} p{margin:0 0 14px;} ul,ol{margin:0 0 12px;padding-left:22px;} li{margin-bottom:8px;}
+    .tip{background:var(--soft);border:1px solid #bfdbfe;border-radius:14px;padding:16px;margin-top:14px;}
+    .sample{background:#fafafa;border:1px solid var(--line);border-radius:14px;padding:16px;white-space:pre-line;}
+    .cta{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--primary);color:#fff;font-weight:700;}
+    footer{border-top:1px solid var(--line);background:#fff;padding:24px 0 40px;color:var(--sub);font-size:14px;}
+    .footer-links{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+    @media (max-width:768px){.hero h1{font-size:29px}.hero-box,.section{padding:22px}h2{font-size:23px}}
+  </style>
 </head>
 <body>
-
-<header>
+  <header>
     <div class="container nav">
-        <a href="../index.html" class="logo">English Quiz Hub</a>
-        <nav class="menu">
-            <a href="../index.html">홈</a>
-            <a href="index.html">학습 가이드</a>
-            <a href="beginner-english-words.html">초급 영단어</a>
-            <a href="memorization-method.html">단어 암기법</a>
-            <a href="../contact.html">문의하기</a>
-            <a href="../about.html">사이트 소개</a>
-            <a href="../faq.html">FAQ</a>
-        </nav>
+      <a href="/index.html" class="logo">English Quiz Hub</a>
+      <nav class="menu">
+        <a href="/index.html">홈</a>
+        <a href="/guides/index.html">학습 가이드</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/about.html">사이트 소개</a>
+        <a href="/contact.html">문의하기</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-<main class="container" style="padding-top: 40px; padding-bottom: 60px;">
-    <section class="section-head" style="text-align: left;">
-        <h1>📕 오답노트 활용법</h1>
-        <p>오답노트는 내가 모르는 부분을 정확히 짚어주는 가장 강력한 개인 맞춤형 학습 도구입니다.</p>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-box">
+          <h1>오답노트 활용 가이드</h1>
+          <p>
+            영어 단어는 한 번 틀렸다고 끝나는 것이 아니라, 왜 틀렸는지 정리하고 다시 보는 과정이 중요합니다.
+            이 페이지는 퀴즈에서 틀린 단어를 오답노트로 정리해 반복 복습하는 방법을 안내합니다.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <div class="side-stack" style="margin-top: 30px; grid-template-columns: 1fr; gap: 24px;">
-        <div class="side-card">
-            <h2>1. 틀린 이유를 분석하세요</h2>
-            <p>단순히 단어를 옮겨 적는 것에 그치지 마세요. "철자가 비슷해서", "반대말과 헷갈려서", "아예 처음 보는 단어여서" 등 틀린 이유를 짧게 메모하는 것만으로도 기억의 강도가 달라집니다.</p>
+    <article class="container">
+      <section class="section">
+        <h2>오답노트가 왜 중요한가요?</h2>
+        <p>
+          비슷한 단어를 반복해서 헷갈리는 이유는 뜻만 외우고 쓰임을 충분히 구분하지 못했기 때문인 경우가 많습니다.
+          오답노트는 “무엇을 틀렸는지”보다 “왜 틀렸는지”를 남겨 두는 도구입니다.
+        </p>
+        <ul>
+          <li>헷갈리는 단어를 따로 모아 다시 볼 수 있습니다.</li>
+          <li>자주 틀리는 유형을 파악할 수 있습니다.</li>
+          <li>예문과 함께 정리하면 기억이 더 오래갑니다.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>오답노트에 꼭 적어야 할 5가지</h2>
+        <ol>
+          <li><strong>단어</strong> : 예) receive</li>
+          <li><strong>뜻</strong> : 받다</li>
+          <li><strong>내가 고른 오답</strong> : 보내다</li>
+          <li><strong>왜 틀렸는지</strong> : send와 receive를 반대로 기억함</li>
+          <li><strong>짧은 예문</strong> : I received your email.</li>
+        </ol>
+        <div class="tip">
+          시간이 없을 때는 “단어 + 뜻 + 예문 1개”만 적어도 충분히 도움이 됩니다.
         </div>
+      </section>
 
-        <div class="side-card">
-            <h2>2. 나만의 예문을 만드세요</h2>
-            <p>사전에 나온 예문도 좋지만, 자신의 일상과 관련된 짧은 문장을 직접 만들어 오답노트에 적어보세요. 내가 직접 만든 문장은 훨씬 더 생생하게 뇌에 각인됩니다.</p>
-        </div>
+      <section class="section">
+        <h2>가장 쉬운 정리 방식</h2>
+        <p>아래 형식을 그대로 따라 적으면 됩니다.</p>
+        <div class="sample">단어: receive
+뜻: 받다
+내가 고른 답: 보내다
+틀린 이유: send와 뜻이 헷갈렸음
+예문: I received your message.
+다시 볼 날짜: 내일</div>
+      </section>
 
-        <div class="side-card">
-            <h2>3. 복습 시험 기능을 활용하세요</h2>
-            <p>English Quiz Hub의 '오답들만 다시 시험보기' 기능은 여러분이 완벽히 익힐 때까지 반복할 수 있게 도와줍니다. 오답노트 목록이 비워질 때까지 반복해서 도전해 보세요.</p>
-        </div>
+      <section class="section">
+        <h2>복습 순서</h2>
+        <ol>
+          <li>퀴즈를 풀고 틀린 단어를 저장합니다.</li>
+          <li>당일에는 뜻과 예문만 가볍게 다시 확인합니다.</li>
+          <li>다음 날 오답노트만 따로 봅니다.</li>
+          <li>3일 후 다시 퀴즈로 확인합니다.</li>
+          <li>또 틀리면 비슷한 단어와 차이까지 함께 정리합니다.</li>
+        </ol>
+      </section>
 
-        <div class="side-card">
-            <h2>4. 아는 단어는 과감히 삭제하세요</h2>
-            <p>오답노트의 목적은 모르는 것을 줄여나가는 것입니다. 두세 번 반복해서 완벽히 내 것이 된 단어는 목록에서 삭제하여 학습 범위를 좁혀나가는 것이 효율적입니다.</p>
-        </div>
-    </div>
+      <section class="section">
+        <h2>자주 하는 실수</h2>
+        <ul>
+          <li>틀린 단어를 저장만 하고 다시 보지 않는 경우</li>
+          <li>한국어 뜻만 적고 예문은 생략하는 경우</li>
+          <li>왜 틀렸는지 기록하지 않는 경우</li>
+          <li>오답노트를 너무 길게 써서 오히려 복습이 어려워지는 경우</li>
+        </ul>
+      </section>
 
-    <div style="margin-top: 40px; text-align: center;">
-        <a href="../index.html" class="btn btn-primary">← 홈에서 오답노트 작성 시작하기</a>
-    </div>
-</main>
+      <section class="section">
+        <h2>English Quiz Hub에서 활용하는 방법</h2>
+        <p>
+          홈의 퀴즈를 풀고 틀린 단어를 오답노트에 저장한 뒤, 다음 날 다시 보면 됩니다.
+          그다음 <a href="/guides/memorization-method.html">단어 암기 방법</a> 가이드와 함께 보면 복습 흐름을 더 쉽게 만들 수 있습니다.
+        </p>
+        <p style="margin-top:18px;">
+          <a class="cta" href="/index.html">홈에서 퀴즈 시작하기</a>
+        </p>
+      </section>
+    </article>
+  </main>
 
-<footer>
+  <footer>
     <div class="container">
-        <div class="footer-links">
-            <a href="../index.html">홈</a>
-            <a href="index.html">학습 가이드</a>
-            <a href="../about.html">사이트 소개</a>
-            <a href="../privacy.html">개인정보처리방침</a>
-            <a href="../terms.html">이용약관</a>
-            <a href="../contact.html">문의하기</a>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 English Quiz Hub. 영어 단어 퀴즈와 복습 중심의 학습 사이트.</p>
-        </div>
+      <div class="footer-links">
+        <a href="/index.html">홈</a>
+        <a href="/guides/index.html">학습 가이드</a>
+        <a href="/about.html">사이트 소개</a>
+        <a href="/privacy.html">개인정보처리방침</a>
+        <a href="/terms.html">이용약관</a>
+        <a href="/contact.html">문의하기</a>
+      </div>
+      <div>© 2026 English Quiz Hub. 오답노트 활용 가이드.</div>
     </div>
-</footer>
-
+  </footer>
 </body>
 </html>
