@@ -1,48 +1,37 @@
-# Blueprint: Master English Word Quiz
+# Blueprint: English Quiz Hub
 
 ## Overview
-A web-based multiple-choice English vocabulary quiz. Designed to help users improve their vocabulary through quick, interactive sessions. It combines a local word database with a real-time dictionary API for phonetics.
+A comprehensive web-based platform for English vocabulary learning. It features interactive multiple-choice quizzes, a persistent "Wrong Answer Notebook" for review, and a suite of educational guides. The system integrates with a real-time dictionary API to provide accurate phonetics and example sentences.
 
 ## Current State
-- **Core Files:** `index.html`, `style.css`, `main.js`.
+- **Core Files:** `index.html`, `assets/css/style.css`, `assets/js/main.js`.
+- **Pages & Content:**
+    - `index.html`: Revamped homepage with integrated quiz, progress tracking, and feature highlights.
+    - `about.html`, `faq.html`, `contact.html`, `privacy.html`, `terms.html`: Consistent modern UI with sticky headers and responsive layouts.
+    - `guides/`: A full set of 7 educational guides (Beginner, Memorization, Wrong Note, Daily Plan, Travel, Business, Korean Mistakes).
 - **Functionality:**
-    - Multiple-choice quiz format (4 options).
-    - Local `wordDb` containing 200 high-frequency English words.
-    - Asynchronous phonetic fetching from `api.dictionaryapi.dev`.
-    - Modern design with grid layout and interactive feedback (color changes, animations).
-    - Educational content section for "AdSense optimization" and learning tips.
-    - **Daily Progress & Streak:** Progress bar and consecutive correct answer tracking.
-    - **Review Mode:** "Wrong Answer Notebook" functionality using LocalStorage to re-test missed words.
-- **SEO & Analytics:**
-    - Google Site Verification: Active.
-    - Naver Site Verification: Active.
-    - Meta tags for description, keywords, and Open Graph.
-- **Design:** 
-    - Modern "card-based" UI, clean spacing, primary color: `#3b82f6`.
-    - Improved Button Design: Large, high-visibility option buttons with clear correct/wrong states.
-    - Responsive layout for mobile and desktop.
-    - **UX Improvements:** Defined utility classes for loading, status, and placeholder messages to ensure consistent, friendly communication.
+    - **Quiz System:** 200-word database, randomized options, real-time phonetic and example fetching via API.
+    - **Gamification:** Daily goal tracking (20 words), progress bar, and correct answer streak counter.
+    - **Review System:** Automated "Wrong Answer Notebook" saving missed words to LocalStorage with a dedicated "Review Mode" quiz.
+    - **UX/UI:** Modern, card-based responsive design using CSS variables and Pretendard font. Sticky navigation and unified branding.
+- **SEO & Connectivity:**
+    - Integrated Google and Naver site verifications.
+    - Open Graph tags and canonical URLs for better social sharing and search ranking.
 
-## Plan & Steps for Current Requested Change
+## Implementation History
 1.  **Switch to Multiple Choice:** [COMPLETED]
-    - Changed the quiz UI from text input to a grid of buttons.
-    - Updated `main.js` logic for verifying button clicks.
-2.  **Modernize UI/UX:** [COMPLETED]
-    - Implemented a card-based design with subtle shadows and grid layout.
-    - Added button hover effects and "shake" animation for incorrect answers.
-    - Integrated automatic phonetic fetching for a dynamic feel.
-    - **Refined Button Styles:** Enlarged buttons, increased font weight, and added distinct colors for feedback.
-3.  **UX Messaging Enhancements:** [COMPLETED]
-    - Standardized placeholder text for "Loading", "Status", "Empty Notebook", and "Quiz Help".
-    - Added CSS utility classes (`loading-text`, `status-text`, `empty-note-text`, `quiz-help-text`, `result-placeholder`) for consistent styling.
-    - Updated `index.html` and `main.js` to use these new styles and friendly messaging.
-3.  **Future Enhancements:**
-    - Scoring system (streak counts).
-    - Randomize option order for better replayability.
-    - Add a "Show Definition" button or reveal definition after answering.
-    - Implement a "Daily Goal" or progress bar.
+    - Migrated from text input to an interactive button grid.
+2.  **Modern UI Revamp:** [COMPLETED]
+    - Introduced a professional, airy design with soft shadows and a blue-centric color palette.
+    - Implemented a sticky navigation header across all pages.
+3.  **Educational Hub Expansion:** [COMPLETED]
+    - Developed and unified 7 distinct learning guides to provide context beyond simple testing.
+4.  **UX & Feedback Tuning:** [COMPLETED]
+    - Added toast notifications, progress animations, and immediate feedback for correct/wrong answers.
+    - Standardized messaging for loading and empty states.
 
 ## Future Roadmap
-- User accounts (Firebase) to track mastered words.
-- Ability for users to add their own word lists.
-- Sound effects and celebratory animations (e.g., confetti).
+- **Social Integration:** Allow users to share their daily progress or streaks.
+- **Enhanced Data:** Support for multiple word lists or difficulty levels.
+- **Persistence:** Optional Firebase integration for cross-device synchronization.
+- **Multimedia:** Integrated audio playback for all words (Web Speech API currently active).

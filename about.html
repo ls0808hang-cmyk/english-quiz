@@ -3,78 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사이트 소개 - English Quiz Hub</title>
+    <title>사이트 소개 | English Quiz Hub</title>
     <meta name="description" content="English Quiz Hub는 영어 단어를 퀴즈 형식으로 익히고, 틀린 표현을 다시 복습하면서 기억에 오래 남도록 돕기 위해 만든 학습 사이트입니다.">
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        body { font-family: 'Pretendard', -apple-system, sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; padding: 40px 20px; background-color: #f4f7f6; }
-        .content-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        section { margin-bottom: 40px; }
-        h2 { color: var(--primary, #3b82f6); border-left: 5px solid var(--primary, #3b82f6); padding-left: 15px; margin-bottom: 15px; font-size: 1.5rem; }
-        p { color: #4b5563; font-size: 1.05rem; }
-        .contact-box { background: #f0fdf4; padding: 25px; border-radius: 12px; border: 1px solid #dcfce7; }
-        .contact-box h2 { border-left-color: #22c55e; color: #166534; }
-    </style>
 </head>
 <body>
-    <div class="content-box">
-        <!-- 1. 메인 히어로 -->
-        <section class="page-hero">
-            <h1>English Quiz Hub 소개</h1>
-            <p>
-                English Quiz Hub는 영어 단어를 퀴즈 형식으로 익히고,
-                틀린 표현을 다시 복습하면서 기억에 오래 남도록 돕기 위해 만든 학습 사이트입니다.
-            </p>
-        </section>
 
-        <!-- 2. 이 사이트가 하는 일 -->
-        <section>
-            <h2>이 사이트가 하는 일</h2>
-            <p>
-                이 사이트는 단순한 문제 풀이 페이지가 아니라, 영어 단어 학습을 꾸준히 이어갈 수 있도록
-                퀴즈, 오답노트, 주제별 단어 모음, 초급 학습 가이드를 함께 제공합니다.
-            </p>
-        </section>
+<header>
+    <div class="container nav">
+        <a href="index.html" class="logo">English Quiz Hub</a>
+        <nav class="menu">
+            <a href="index.html">홈</a>
+            <a href="guides/index.html">학습 가이드</a>
+            <a href="guides/beginner-english-words.html">초급 영단어</a>
+            <a href="guides/memorization-method.html">단어 암기법</a>
+            <a href="contact.html">문의하기</a>
+            <a href="about.html">사이트 소개</a>
+            <a href="faq.html">FAQ</a>
+        </nav>
+    </div>
+</header>
 
-        <!-- 3. 누구를 위한 사이트인가요? -->
-        <section>
-            <h2>누구를 위한 사이트인가요?</h2>
-            <p>
-                영어를 처음 시작하는 초급 학습자, 여행 영어가 필요한 사용자,
-                직장이나 일상에서 자주 쓰는 표현을 익히고 싶은 학습자를 위한 사이트입니다.
-            </p>
-        </section>
+<main class="container" style="padding-top: 40px; padding-bottom: 60px;">
+    <section class="section-head" style="text-align: left;">
+        <h1>English Quiz Hub 소개</h1>
+        <p>영어 학습을 더 즐겁고 효과적으로 만들기 위한 우리의 노력입니다.</p>
+    </section>
 
-        <!-- 4. 콘텐츠 구성 방식 -->
-        <section>
-            <h2>콘텐츠 구성 방식</h2>
-            <p>
-                사이트 내 퀴즈와 가이드는 영어 단어와 표현을 더 쉽게 익힐 수 있도록
-                주제별 정리, 반복 복습, 오답 중심 학습 흐름을 기준으로 구성하고 있습니다.
-            </p>
-        </section>
+    <div class="side-stack" style="margin-top: 30px; grid-template-columns: 1fr; gap: 24px;">
+        <div class="side-card">
+            <h2>🎯 우리의 목표</h2>
+            <p>English Quiz Hub는 단순히 단어 뜻을 암기하는 것을 넘어, 퀴즈와 복습의 선순환 구조를 통해 학습자가 영단어를 '장기 기억'으로 전환할 수 있도록 돕는 것을 목표로 합니다.</p>
+        </div>
 
-        <!-- 5. 업데이트 원칙 -->
-        <section>
-            <h2>업데이트 원칙</h2>
-            <p>
-                사용자가 더 쉽게 이해할 수 있도록 학습 가이드와 단어 자료를 꾸준히 보완하고,
-                잘못된 표현이나 오탈자가 확인되면 수정합니다.
-            </p>
-        </section>
+        <div class="side-card">
+            <h2>💡 서비스 특징</h2>
+            <p>실시간 사전 API를 활용한 정확한 발음과 예문 제공, 브라우저 로컬 저장소를 활용한 개인 맞춤형 오답노트 기능 등 학습자에게 꼭 필요한 기능들을 무료로 제공합니다.</p>
+        </div>
 
-        <!-- 6. 문의 -->
-        <section>
-            <h2>문의</h2>
-            <p>
-                사이트 이용 중 오류, 오탈자, 개선 제안이 있으면 아래 이메일로 연락해 주세요.
-            </p>
-            <p>Email: upshop79@gmail.com</p>
-        </section>
+        <div class="side-card">
+            <h2>🤝 누구를 위한 서비스인가요?</h2>
+            <p>영어를 처음 시작하는 초급자부터, 여행이나 비즈니스 상황에서 자주 쓰이는 핵심 표현을 빠르게 익히고 싶은 분들까지 모두를 위해 열려 있습니다.</p>
+        </div>
 
-        <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; text-align: center;">
-            <a href="index.html" class="text-link">← 메인 퀴즈 화면으로 돌아가기</a>
+        <div class="side-card">
+            <h2>📅 업데이트 원칙</h2>
+            <p>사용자의 피드백을 바탕으로 학습 가이드와 단어 데이터베이스를 꾸준히 보완하며, 더 나은 학습 경험을 제공하기 위해 기술적인 개선도 멈추지 않습니다.</p>
         </div>
     </div>
+
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="btn btn-primary">← 퀴즈 풀러 가기</a>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="index.html">홈</a>
+            <a href="guides/index.html">학습 가이드</a>
+            <a href="about.html">사이트 소개</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="terms.html">이용약관</a>
+            <a href="contact.html">문의하기</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 English Quiz Hub. 영어 단어 퀴즈와 복습 중심의 학습 사이트.</p>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>

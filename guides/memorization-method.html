@@ -1,354 +1,77 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>단어 암기 방법 가이드 | English Quiz Hub</title>
-  <meta name="description" content="영어 단어를 더 오래 기억하기 위한 암기 방법 가이드입니다. 반복 주기, 예문 활용, 오답노트, 짧은 복습 루틴을 정리했습니다." />
-  <style>
-    :root{
-      --bg:#f7f8fb;
-      --card:#ffffff;
-      --text:#1f2937;
-      --sub:#6b7280;
-      --line:#e5e7eb;
-      --primary:#2563eb;
-      --soft:#eff6ff;
-    }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.8;
-    }
-    a{text-decoration:none;color:var(--primary);}
-    .container{
-      width:min(920px, 92%);
-      margin:0 auto;
-    }
-    header{
-      background:#fff;
-      border-bottom:1px solid var(--line);
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
-    .nav{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:16px;
-      padding:16px 0;
-    }
-    .logo{
-      font-weight:700;
-      font-size:20px;
-      color:var(--text);
-    }
-    .menu{
-      display:flex;
-      gap:16px;
-      flex-wrap:wrap;
-    }
-    .menu a{
-      color:var(--sub);
-      font-size:14px;
-    }
-    .hero{
-      padding:52px 0 24px;
-    }
-    .hero-box{
-      background:linear-gradient(135deg, #eff6ff, #ffffff);
-      border:1px solid #dbeafe;
-      border-radius:22px;
-      padding:32px;
-    }
-    .hero h1{
-      margin:0 0 14px;
-      font-size:36px;
-      line-height:1.25;
-    }
-    .hero p{
-      margin:0;
-      color:var(--sub);
-      font-size:17px;
-    }
-    article{
-      padding:10px 0 60px;
-    }
-    .section{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:28px;
-      margin-bottom:22px;
-      box-shadow:0 8px 24px rgba(15,23,42,0.04);
-    }
-    h2{
-      margin:0 0 12px;
-      font-size:26px;
-      line-height:1.35;
-    }
-    h3{
-      margin:22px 0 10px;
-      font-size:20px;
-    }
-    p{margin:0 0 14px;}
-    ul, ol{
-      margin:0 0 12px;
-      padding-left:22px;
-    }
-    li{margin-bottom:8px;}
-    .tip{
-      background:var(--soft);
-      border:1px solid #bfdbfe;
-      border-radius:14px;
-      padding:16px;
-      margin-top:14px;
-    }
-    .routine{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:16px;
-      margin-top:16px;
-    }
-    .routine-card{
-      background:#fafafa;
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:18px;
-    }
-    .routine-card strong{
-      display:block;
-      margin-bottom:8px;
-      font-size:18px;
-    }
-    .cta{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:10px;
-      background:var(--primary);
-      color:#fff;
-      font-weight:700;
-    }
-    footer{
-      border-top:1px solid var(--line);
-      background:#fff;
-      padding:24px 0 40px;
-      color:var(--sub);
-      font-size:14px;
-    }
-    .footer-links{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    @media (max-width: 820px){
-      .hero h1{font-size:29px;}
-      .hero-box,.section{padding:22px;}
-      h2{font-size:23px;}
-      .routine{grid-template-columns:1fr;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단어 암기 방법 | English Quiz Hub</title>
+    <meta name="description" content="과학적인 암기 원리와 효율적인 복습 루틴을 통해 영단어를 정복하는 방법을 안내합니다.">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a href="/index.html" class="logo">English Quiz Hub</a>
-      <nav class="menu">
-        <a href="/index.html">홈</a>
-        <a href="/guides/index.html">학습 가이드</a>
-        <a href="/contact.html">문의하기</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-box">
-          <h1>단어 암기 방법 가이드</h1>
-          <p>
-            영어 단어를 오래 기억하려면 한 번에 많이 외우는 것보다,
-            짧게 반복하고 예문과 연결하고 틀린 단어를 다시 보는 흐름이 중요합니다.
-            이 페이지는 부담을 줄이면서도 기억에 남기 쉽운 단어 암기 방법을 정리한 가이드입니다.
-          </p>
-        </div>
-      </div>
+<header>
+    <div class="container nav">
+        <a href="../index.html" class="logo">English Quiz Hub</a>
+        <nav class="menu">
+            <a href="../index.html">홈</a>
+            <a href="index.html">학습 가이드</a>
+            <a href="beginner-english-words.html">초급 영단어</a>
+            <a href="memorization-method.html">단어 암기법</a>
+            <a href="../contact.html">문의하기</a>
+            <a href="../about.html">사이트 소개</a>
+            <a href="../faq.html">FAQ</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container" style="padding-top: 40px; padding-bottom: 60px;">
+    <section class="section-head" style="text-align: left;">
+        <h1>🧠 단어 암기 방법</h1>
+        <p>무작정 외우는 것보다 중요한 것은 '뇌가 기억하기 쉬운 환경'을 만드는 것입니다.</p>
     </section>
 
-    <article class="container">
-      <section class="section">
-        <h2>왜 단어를 금방 잊어버릴까요?</h2>
-        <p>
-          많은 학습자가 단어장을 한 번 훑어보고 외웠다고 느끼지만,
-          실제로는 반복 간격이 너무 길거나 문장 속에서 다시 보지 않아서 금방 잊어버립니다.
-        </p>
-        <p>
-          특히 한국어 뜻만 빠르게 확인하는 방식은 처음엔 편하지만,
-          실제 상황에서 단어가 떠오르지 않는 경우가 많습니다.
-          그래서 “짧게 반복하기”, “예문으로 연결하기”, “틀린 단어 다시 보기”가 중요합니다.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>효율적인 단어 암기의 기본 원칙</h2>
-        <ol>
-          <li><strong>한 번에 너무 많이 외우지 않기</strong></li>
-          <li><strong>뜻만 외우지 말고 예문과 함께 보기</strong></li>
-          <li><strong>바로 다음 날 다시 보기</strong></li>
-          <li><strong>헷갈린 단어를 따로 모아 반복하기</strong></li>
-          <li><strong>퀴즈나 문제 형태로 다시 확인하기</strong></li>
-        </ol>
-
-        <div class="tip">
-          단어를 “완벽하게 외운 뒤 다음으로 넘어가야 한다”는 생각보다,
-          자주 다시 만나는 구조를 만드는 것이 더 현실적이고 오래 갑니다.
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>단어 암기 방법 1: 짧게 나누어 반복하기</h2>
-        <p>
-          단어 공부를 오래 하지 못하는 가장 큰 이유 중 하나는,
-          한 번에 너무 많은 양을 하려다가 금방 지치기 때문입니다.
-          초급 학습자라면 하루 10~15개 정도로 나누는 방식이 부담이 적습니다.
-        </p>
-        <ul>
-          <li>월요일: 새 단어 10개 학습</li>
-          <li>화요일: 어제 단어 복습 + 새 단어 10개 학습</li>
-          <li>수요일: 헷갈린 단어만 다시 확인</li>
-        </ul>
-        <p>
-          이런 방식은 공부 시간이 짧아도 이어가기 쉽고,
-          자연스럽게 반복 횟수가 늘어나 기억에 도움이 됩니다.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>단어 암기 방법 2: 예문으로 연결하기</h2>
-        <p>
-          단어를 혼자 떼어 외우면 실제 사용 장면이 잘 떠오르지 않습니다.
-          반대로 짧은 예문과 함께 익히면 단어가 문장 속에서 살아납니다.
-        </p>
-        <ul>
-          <li><strong>order</strong> → I want to order coffee.</li>
-          <li><strong>meeting</strong> → We have a meeting at 2 p.m.</li>
-          <li><strong>late</strong> → He is late today.</li>
-        </ul>
-        <p>
-          예문은 길 필요가 없습니다. 짧고 자주 쓰는 문장이면 충분합니다.
-          중요한 것은 단어의 뜻과 쓰임을 함께 보는 것입니다.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>단어 암기 방법 3: 오답노트 활용하기</h2>
-        <p>
-          기억에 잘 남지 않는 단어는 대부분 한 번 이상 헷갈렸던 단어입니다.
-          그래서 틀린 단어를 오답노트에 정리하면 복습 효율이 좋아집니다.
-        </p>
-        <p>오답노트에는 아래 5가지를 적어보세요.</p>
-        <ul>
-          <li>단어</li>
-          <li>뜻</li>
-          <li>헷갈린 이유</li>
-          <li>짧은 예문</li>
-          <li>다시 볼 날짜</li>
-        </ul>
-        <p>
-          오답노트를 자세히 쓰기 어렵다면 최소한 “단어 + 뜻 + 예문 1개”만 적어도 충분히 도움이 됩니다.
-          더 자세한 방법은 <a href="/guides/wrong-answer-notebook-guide.html">오답노트 활용 가이드</a>에서 확인할 수 있습니다.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>단어 암기 방법 4: 퀴즈로 다시 확인하기</h2>
-        <p>
-          단어를 읽기만 하는 것보다 직접 정답을 고르는 방식이 기억에 더 도움이 될 때가 많습니다.
-          퀴즈를 풀면 “아는 줄 알았는데 헷갈렸던 단어”를 쉽게 발견할 수 있기 때문입니다.
-        </p>
-        <p>
-          퀴즈는 암기 후 확인용으로 쓰기 좋고,
-          틀린 문제는 바로 오답노트로 연결하면 복습 흐름이 자연스럽게 이어집니다.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>부담 없는 15분 단어 복습 루틴</h2>
-        <p>
-          시간이 많지 않아도 아래처럼 짧게 나누면 꾸준히 이어가기 쉽습니다.
-        </p>
-
-        <div class="routine">
-          <div class="routine-card">
-            <strong>아침 5분</strong>
-            <p>어제 본 단어 10개를 빠르게 다시 봅니다. 뜻만 보지 말고 예문도 함께 확인합니다.</p>
-          </div>
-          <div class="routine-card">
-            <strong>낮 5분</strong>
-            <p>짧은 퀴즈를 풀며 기억이 흐려진 단어를 체크합니다. 헷갈린 단어는 따로 표시합니다.</p>
-          </div>
-          <div class="routine-card">
-            <strong>저녁 5분</strong>
-            <p>틀린 단어만 다시 보면서 오답노트에 적고, 다음 복습 날짜를 정합니다.</p>
-          </div>
+    <div class="side-stack" style="margin-top: 30px; grid-template-columns: 1fr; gap: 24px;">
+        <div class="side-card">
+            <h2>1. 에빙하우스 망각 곡선 활용</h2>
+            <p>인간의 뇌는 학습 후 20분만 지나도 42%를 잊어버립니다. 이를 극복하는 유일한 방법은 '주기적 복습'입니다. 학습 직후, 1일 후, 1주일 후, 1개월 후의 간격으로 복습하는 것이 가장 효율적입니다.</p>
         </div>
 
-        <div class="tip">
-          매일 길게 공부하는 것보다, 매일 짧게라도 반복하는 편이 더 현실적이고 유지하기 쉽습니다.
+        <div class="side-card">
+            <h2>2. 이미지와 문맥 연결</h2>
+            <p>단어의 스펠링과 한국어 뜻만 기계적으로 연결하지 마세요. 해당 단어가 쓰이는 상황을 머릿속으로 그리거나, 관련 이미지와 함께 기억하면 뇌의 더 넓은 영역을 자극해 기억이 강화됩니다.</p>
         </div>
-      </section>
 
-      <section class="section">
-        <h2>자주 하는 실수</h2>
-        <ul>
-          <li>하루에 너무 많은 단어를 외우려고 함</li>
-          <li>뜻만 보고 예문을 건너뜀</li>
-          <li>한 번 본 단어를 다시 보지 않음</li>
-          <li>헷갈린 단어를 따로 정리하지 않음</li>
-          <li>퀴즈에서 틀린 문제를 그냥 넘김</li>
-        </ul>
-        <p>
-          단어 공부가 잘 안 되는 이유가 의지가 약해서가 아니라,
-          복습 구조가 없어서인 경우도 많습니다.
-          구조만 바꿔도 훨씬 편해집니다.
-        </p>
-      </section>
+        <div class="side-card">
+            <h2>3. 능동적 회상 (Active Recall)</h2>
+            <p>단순히 읽기만 하는 것은 '공부했다는 느낌'만 줄 뿐입니다. 퀴즈를 풀거나 단어를 가리고 뜻을 떠올리는 등 뇌에 자극을 주는 '능동적 회상' 과정이 있어야 장기 기억으로 넘어갑니다.</p>
+        </div>
 
-      <section class="section">
-        <h2>마무리</h2>
-        <p>
-          단어 암기의 핵심은 특별한 비법보다도,
-          짧게 반복하고 예문으로 연결하고 틀린 단어를 다시 보는 흐름을 만드는 데 있습니다.
-          이 방식은 영어 초급자에게도 부담이 적고, 오래 이어가기 좋습니다.
-        </p>
-        <p>
-          다음으로는 <a href="/guides/beginner-english-words.html">초급 영단어 가이드</a>를 함께 읽고,
-          홈에서 퀴즈를 풀며 직접 복습 루틴을 만들어 보세요.
-        </p>
-        <p style="margin-top:18px;">
-          <a class="cta" href="/index.html">홈에서 퀴즈 시작하기</a>
-        </p>
-      </section>
-    </article>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="/index.html">홈</a>
-        <a href="/guides/index.html">학습 가이드</a>
-        <a href="/about.html">사이트 소개</a>
-        <a href="/privacy.html">개인정보처리방침</a>
-        <a href="/terms.html">이용약관</a>
-        <a href="/contact.html">문의하기</a>
-      </div>
-      <div>© 2026 English Quiz Hub. 반복 복습 중심의 영어 단어 암기 가이드.</div>
+        <div class="side-card">
+            <h2>4. 소리 내어 읽기</h2>
+            <p>눈으로만 보는 것보다 직접 발음해 보고 자신의 목소리를 듣는 과정이 포함되면 청각적 자극이 더해져 기억 효과가 두 배 이상 높아집니다. 사이트의 '발음 듣기' 기능을 적극 활용하세요.</p>
+        </div>
     </div>
-  </footer>
+
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="../index.html" class="btn btn-primary">← 홈에서 능동적으로 퀴즈 풀기</a>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="../index.html">홈</a>
+            <a href="index.html">학습 가이드</a>
+            <a href="../about.html">사이트 소개</a>
+            <a href="../privacy.html">개인정보처리방침</a>
+            <a href="../terms.html">이용약관</a>
+            <a href="../contact.html">문의하기</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 English Quiz Hub. 영어 단어 퀴즈와 복습 중심의 학습 사이트.</p>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
